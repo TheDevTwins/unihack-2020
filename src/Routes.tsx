@@ -8,7 +8,7 @@ const Routes: React.FC = () => {
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
-          <Editor initialValue={'<div></div>'} onSave={(s: string) => {}} />
+          <Editor initialValue={'<div></div>'} onSave={() => {}} />
         </Route>
         <Redirect to="/" />
       </Switch>
