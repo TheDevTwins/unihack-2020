@@ -23,6 +23,8 @@ export const TeacherProvider: React.FC = ({ children }) => {
   const query = coursesRef.where('creatorUid', '==', creatorUid);
   const [courses, fetching, error] = useCollectionData<Course>(query);
 
+  console.log({ courses });
+
   return (
     <TeacherContext.Provider
       value={{
