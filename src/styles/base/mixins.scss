@@ -1,0 +1,111 @@
+/* By Google
+  Name          Code        Unit(px)    Unit(em)
+* Mobile S      mobileS     320px       20em
+* Mobile M      mobileM     375px       23.4375em
+* Mobile L      mobileL     425px       26.5625em
+* Tablet        tab         768px       48em
+* Laptop        laptop      1024px      64em
+* Laptop L      laptopL     1440px      90em
+* 4k            large       > 1440px    > 90em
+*/
+
+/* By antd
+* Name          Code        Unit(px)    Unit(em)
+                xs          480px       30rem
+                sm          576px       36em
+                md          768px       48em
+                lg          992px       62em
+                xl          1200px      75em
+                xxl         1600px      100em   
+*/
+
+@mixin respond($br) {
+  // GOOGLE
+
+  // Max
+  @if ($br == mobileS) {
+    @media only screen and (max-width: 20em) {
+      @content;
+    }
+  }
+  @if ($br == mobileM) {
+    @media only screen and (max-width: 23.4375em) {
+      @content;
+    }
+  }
+  @if ($br == mobileL) {
+    @media only screen and (max-width: 26.5625em) {
+      @content;
+    }
+  }
+  @if ($br == tab) {
+    @media only screen and (max-width: 48em) {
+      @content;
+    }
+  }
+  @if ($br == laptop) {
+    @media only screen and (max-width: 64em) {
+      @content;
+    }
+  }
+
+  // Min
+  @if ($br == laptopL) {
+    @media only screen and (min-width: 90em) {
+      @content;
+    }
+  }
+
+  // ANTD
+
+  // Max
+  @if ($br == xs) {
+    @media only screen and (max-width: 30em) {
+      @content;
+    }
+  }
+  @if ($br == sm) {
+    @media only screen and (max-width: 36em) {
+      @content;
+    }
+  }
+  @if ($br == md) {
+    @media only screen and (max-width: 48em) {
+      @content;
+    }
+  }
+  @if ($br == lg) {
+    @media only screen and (max-width: 62em) {
+      @content;
+    }
+  }
+  @if ($br == xl) {
+    @media only screen and (max-width: 75em) {
+      @content;
+    }
+  }
+  @if ($br == xxl) {
+    @media only screen and (max-width: 100em) {
+      @content;
+    }
+  }
+
+  // Custom
+
+  // Min
+  @if ($br == largeS) {
+    @media only screen and (min-width: 120em) {
+      @content;
+    }
+  }
+  @if ($br == largeM) {
+    @media only screen and (min-width: 160em) {
+      @content;
+    }
+  }
+  @if ($br == largeL) {
+    @media only screen and (min-width: 200em) {
+      @content;
+    }
+  }
+}
