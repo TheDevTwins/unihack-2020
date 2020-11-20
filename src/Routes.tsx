@@ -4,6 +4,7 @@ import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { UserContext } from 'contexts';
 
 import LoginMock from './views/LoginMock';
+import UserView from './views/UserView';
 
 const Routes: React.FC = () => {
   const { user, logout } = useContext(UserContext);
@@ -20,8 +21,7 @@ const Routes: React.FC = () => {
   const Content = (
     <>
       <Route exact path="/">
-        <h1>Hello unihack</h1>
-        <button onClick={logout}>logout</button>
+        <UserView />
       </Route>
       <Redirect to="/" />
     </>
