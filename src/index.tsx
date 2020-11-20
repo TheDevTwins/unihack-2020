@@ -4,13 +4,15 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import { UserProvider } from 'contexts';
+import { UserProvider, UserTypeContextProvider } from 'contexts';
 
 import 'antd/dist/antd.css';
 
 ReactDOM.render(
   <UserProvider>
-    <App />
+    <UserTypeContextProvider>
+      <App />
+    </UserTypeContextProvider>
   </UserProvider>,
   document.getElementById('root')
 );
