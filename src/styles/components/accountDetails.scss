@@ -1,0 +1,18 @@
+.accountDetails {
+  display: flex;
+  align-items: center;
+  // make some temp stuff
+  &__username {
+    font-size: 1.7rem;
+    font-family: $font-primary;
+    color: $color-primary;
+    margin-right: 1rem;
+  }
+
+  &__icon {
+    height: 4rem;
+    width: 4rem;
+    background-color: rgb(220, 220, 220);
+    border-radius: 50%;
+  }
+}
