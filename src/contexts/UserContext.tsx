@@ -27,19 +27,19 @@ export const UserProvider: React.FC = ({ children }) => {
 
   const [loggingIn, setLoggingIn] = useState(false);
 
-  // Add user to database
-  useEffect(() => {
-    if (!firebaseUser || firestoreUser) return;
-
-    const addUserToDatabase = async () =>
-      await userDoc.set({
-        uid: firebaseUser.uid,
-        email: firebaseUser.email,
-        displayName: firebaseUser.displayName,
-      });
-
-    addUserToDatabase().then();
-  }, [firestoreUser, firebaseUser]);
+  // // Add user to database
+  // useEffect(() => {
+  //   if (!firebaseUser || firestoreUser) return;
+  //
+  //   const addUserToDatabase = async () =>
+  //     await userDoc.set({
+  //       uid: firebaseUser.uid,
+  //       email: firebaseUser.email,
+  //       displayName: firebaseUser.displayName,
+  //     });
+  //
+  //   addUserToDatabase().then();
+  // }, [firestoreUser, firebaseUser]);
 
   const login = async (email: string, password: string) => {
     setLoggingIn(true);
