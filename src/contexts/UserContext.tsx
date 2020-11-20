@@ -10,8 +10,9 @@ import { User } from './types';
 type ContextProps = {
   loading: boolean;
   user: User;
-  login: (email: string, password: string) => void;
   error: any;
+  login: (email: string, password: string) => void;
+  logout: () => void;
 };
 
 export const UserContext = createContext<ContextProps>({} as ContextProps);
@@ -46,6 +47,10 @@ export const UserProvider: React.FC = ({ children }) => {
     }
   };
 
+  const logout = async () => {
+    await projectAuth.signOut();
+  };
+
   console.log({ firestoreUser });
 
   return (
@@ -55,6 +60,7 @@ export const UserProvider: React.FC = ({ children }) => {
         loading: loadingFirebaseUser || loadingFirestoreUser,
         error,
         login,
+        logout,
       }}
     >
       {children}
