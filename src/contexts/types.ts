@@ -10,7 +10,15 @@ export type User = {
   user_type: number;
 };
 
+export const EASY = 0;
+export const MEDIUM = 1;
+export const HARD = 2;
+
 export type Course = {
   creatorUid: string;
-  lessons: string;
+  title: string;
+  description: string;
+  tags: string[];
+  duration: number; // hours
+  difficulty: number;
 };
