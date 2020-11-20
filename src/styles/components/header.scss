@@ -1,2 +1,14 @@
 .header {
+  display: flex;
+  padding: 3rem 0;
+  box-shadow: 0 0.3rem 0.2rem 0 rgba(#000, 0.15);
+
+  &__container {
+    display: flex;
+    align-items: center;
+
+    & > *:not(:last-child) {
+      margin-right: 3rem;
+    }
+  }
 }

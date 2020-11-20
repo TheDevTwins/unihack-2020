@@ -1,2 +1,19 @@
 .logo {
+  display: flex;
+  align-items: center;
+
+  &__img {
+    height: 5rem;
+    width: 5rem;
+    background-color: $color-primary;
+    margin-right: 2rem;
+  }
+
+  &__text {
+    font-size: 3rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    color: $color-primary;
+    letter-spacing: 0.2rem;
+  }
 }

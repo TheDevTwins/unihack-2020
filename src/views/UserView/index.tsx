@@ -6,8 +6,12 @@ const UserView: React.FC = () => {
   return (
     <div className="userView">
       <div className="header">
-        <Logo />
-        {/* <Menu /> */}
+        <div className="wrapper">
+          <div className="header__container">
+            <Logo />
+            {/* <Menu /> */}
+          </div>
+        </div>
       </div>
     </div>
   );
