@@ -14,11 +14,18 @@ export const EASY = 0;
 export const MEDIUM = 1;
 export const HARD = 2;
 
-export type Course = {
+type Metadata = {
   creatorUid: string;
   title: string;
   description: string;
   tags: string[];
   duration: number; // hours
   difficulty: number;
+  thumbnailUrl: string;
 };
+
+export type Lesson = { title: string; content: string };
+
+export type Course = Metadata & { lessonIds: string[] };
+
+export type Program = Metadata & { courseIds: string[] };
