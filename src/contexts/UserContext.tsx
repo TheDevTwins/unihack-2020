@@ -12,6 +12,7 @@ type ContextProps = {
   user: User;
   error: any;
   login: (email: string, password: string) => void;
+  loggingIn: boolean;
   logout: () => void;
 };
 
@@ -23,6 +24,8 @@ export const UserProvider: React.FC = ({ children }) => {
   const userDoc = projectFirestore.doc(`users/${firebaseUser?.uid || '1'}`);
   const [firestoreUser, loadingFirestoreUser] = useDocumentData<User>(userDoc);
   const [error, setError] = useState(null);
+
+  const [loggingIn, setLoggingIn] = useState(false);
 
   // Add user to database
   useEffect(() => {
@@ -39,12 +42,14 @@ export const UserProvider: React.FC = ({ children }) => {
   }, [firestoreUser, firebaseUser]);
 
   const login = async (email: string, password: string) => {
+    setLoggingIn(true);
     try {
       await projectAuth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
       await projectAuth.signInWithEmailAndPassword(email, password);
     } catch (error) {
       setError(error);
     }
+    setLoggingIn(false);
   };
 
   const logout = async () => {
@@ -60,6 +65,7 @@ export const UserProvider: React.FC = ({ children }) => {
         loading: loadingFirebaseUser || loadingFirestoreUser,
         error,
         login,
+        loggingIn,
         logout,
       }}
     >
