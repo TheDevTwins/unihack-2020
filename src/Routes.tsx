@@ -6,7 +6,7 @@ import { UserContext } from 'contexts';
 import LoginMock from './views/LoginMock';
 
 const Routes: React.FC = () => {
-  const { user } = useContext(UserContext);
+  const { user, logout } = useContext(UserContext);
 
   const LoginEnforcer = (
     <>
@@ -21,6 +21,7 @@ const Routes: React.FC = () => {
     <>
       <Route exact path="/">
         <h1>Hello unihack</h1>
+        <button onClick={logout}>logout</button>
       </Route>
       <Redirect to="/" />
     </>
