@@ -8,7 +8,7 @@ type Props = {
   onSave: (value: string) => void;
 };
 
-const Editor: React.FC<Props> = ({ initialValue, onSave }) => {
+const TextEditor: React.FC<Props> = ({ initialValue, onSave }) => {
   const [value, setValue] = useState(RichTextEditor.createValueFromString(initialValue, 'html'));
   const [hasChanged, setHasChanged] = useState(false);
 
@@ -28,4 +28,4 @@ const Editor: React.FC<Props> = ({ initialValue, onSave }) => {
   );
 };
 
-export default Editor;
+export default TextEditor;
