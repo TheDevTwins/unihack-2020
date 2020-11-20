@@ -11,6 +11,8 @@ type ContextProps = {
   fetching: boolean;
   courses: Course[];
   error: any;
+  createCourse: (title: string) => void;
+  updateCourseDetails: (id: string, data: Partial<Course>) => void;
 };
 
 export const TeacherContext = createContext<ContextProps>({} as ContextProps);
@@ -21,7 +23,17 @@ export const TeacherProvider: React.FC = ({ children }) => {
 
   const coursesRef = projectFirestore.collection('courses');
   const query = coursesRef.where('creatorUid', '==', creatorUid);
-  const [courses, fetching, error] = useCollectionData<Course>(query);
+  const [courses, fetching, error] = useCollectionData<Course>(query, { idField: 'id' });
+
+  const createCourse = async (title: string) => {
+    const newCourseRef = projectFirestore.collection('courses').doc();
+    await newCourseRef.set({ title });
+  };
+
+  const updateCourseDetails = async (id: string, data: Partial<Course>) => {
+    const courseRef = projectFirestore.doc(`/courses/${id}`);
+    await courseRef.update(data);
+  };
 
   console.log({ courses });
 
@@ -31,6 +43,8 @@ export const TeacherProvider: React.FC = ({ children }) => {
         fetching,
         courses: courses || [],
         error,
+        createCourse,
+        updateCourseDetails,
       }}
     >
       {children}

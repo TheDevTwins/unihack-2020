@@ -15,6 +15,7 @@ export const MEDIUM = 1;
 export const HARD = 2;
 
 type Metadata = {
+  id: string;
   creatorUid: string;
   title: string;
   description: string;
@@ -24,7 +25,7 @@ type Metadata = {
   thumbnailUrl: string;
 };
 
-export type Lesson = { title: string; content: string };
+export type Lesson = { id: string; title: string; content: string };
 
 export type Course = Metadata & { lessonIds: string[] };
 
