@@ -1,0 +1,15 @@
+.menu {
+  display: flex;
+
+  &__item {
+    color: $color-grey;
+
+    &:not(:last-child) {
+      margin-right: 1rem;
+    }
+
+    &.active {
+      color: $color-secondary;
+    }
+  }
+}

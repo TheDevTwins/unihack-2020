@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Logo } from 'components';
+import { Logo, Menu } from 'components';
 
 const UserView: React.FC = () => {
   return (
@@ -9,7 +9,7 @@ const UserView: React.FC = () => {
         <div className="wrapper">
           <div className="header__container">
             <Logo />
-            {/* <Menu /> */}
+            <Menu />
           </div>
         </div>
       </div>
