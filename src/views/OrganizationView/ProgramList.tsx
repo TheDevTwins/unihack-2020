@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { Program } from 'src/contexts/types';
 
 const ProgramList: React.FC = () => {
-  const { ownPrograms } = useContext(OrganizationContext);
+  const { ownPrograms, deleteOwnProgram } = useContext(OrganizationContext);
 
   const DIFFICULTIES = ['Easy', 'Medium', 'Hard'];
 
@@ -29,6 +29,14 @@ const ProgramList: React.FC = () => {
             </div>
           </div>
           <div className="listItem__description">{item.description}</div>
+        </div>
+        <div
+          className="listItem__delete"
+          onClick={() => {
+            deleteOwnProgram(item.id);
+          }}
+        >
+          Delete
         </div>
       </div>
     );

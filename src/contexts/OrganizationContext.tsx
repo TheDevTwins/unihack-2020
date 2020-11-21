@@ -17,6 +17,7 @@ type ContextProps = {
   createProgram: (title: string, courseIds: string[]) => void;
   updateProgramDetails: (id: string, data: Partial<Program>) => void;
   getProgramById: (id: string) => Program;
+  deleteOwnProgram: (id: string) => void;
 };
 
 export const OrganizationContext = createContext<ContextProps>({} as ContextProps);
@@ -52,6 +53,11 @@ export const OrganizationProvider: React.FC = ({ children }) => {
     return ownPrograms?.find((item) => item.id === id) || (undefined as any);
   };
 
+  const deleteOwnProgram = async (id: string) => {
+    const programRef = projectFirestore.doc(`/programs/${id}`);
+    await programRef.delete();
+  };
+
   return (
     <OrganizationContext.Provider
       value={{
@@ -63,6 +69,7 @@ export const OrganizationProvider: React.FC = ({ children }) => {
         createProgram,
         updateProgramDetails,
         getProgramById,
+        deleteOwnProgram,
       }}
     >
       {children}
