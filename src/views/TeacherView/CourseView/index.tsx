@@ -10,13 +10,15 @@ import LessonEdit from './LessonEdit';
 
 const CourseView: React.FC = () => {
   const { courseId } = useParams<{ courseId: string }>();
-  const { fetching, selectCourse } = useContext(TeacherContext);
+  const { fetching, selectCourse, selectedCourse } = useContext(TeacherContext);
 
   useEffect(() => {
     !fetching && selectCourse(courseId);
   }, [fetching]);
 
   if (fetching) return null;
+
+  if (!selectedCourse) return null;
 
   return (
     <Switch>

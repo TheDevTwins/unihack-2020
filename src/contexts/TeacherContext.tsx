@@ -38,13 +38,13 @@ export const TeacherProvider: React.FC = ({ children }) => {
   });
 
   const [selectedCourseId, setSelectedCourseId] = useState('');
-  const selectedCourse = ownCourses?.find((item) => item.id === selectedCourseId) || ({} as Course);
+  const selectedCourse = ownCourses?.find((item) => item.id === selectedCourseId) || (undefined as any);
 
   const lessonsRef = projectFirestore.collection('lessons');
   const lessonsQuery = lessonsRef.where(
     firebase.firestore.FieldPath.documentId(),
     'in',
-    selectedCourse.lessonIds || ['1']
+    selectedCourse?.lessonIds || ['1']
   );
   const [lessons, fetchingLessons] = useCollectionData<Lesson>(lessonsQuery, { idField: 'id' });
 
