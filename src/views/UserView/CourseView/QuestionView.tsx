@@ -6,9 +6,10 @@ type props = {
   question: Question;
   answerHandler: (answer: string) => void;
   prevAnswer: string;
+  finished: boolean;
 };
 
-const QuestionView: React.FC<props> = ({ question, answerHandler, prevAnswer }) => {
+const QuestionView: React.FC<props> = ({ question, answerHandler, prevAnswer, finished }) => {
   const radioStyle = {
     display: 'block',
     height: '30px',
@@ -25,7 +26,7 @@ const QuestionView: React.FC<props> = ({ question, answerHandler, prevAnswer }) 
     <div className="question">
       <div className="question__description">{question.description}</div>
 
-      <Radio.Group className="question__answerList" value={prevAnswerIndex}>
+      <Radio.Group className="question__answerList" value={prevAnswerIndex} disabled={finished}>
         {answers.map((answer, i) => {
           return (
             <Radio key={i} style={radioStyle} value={i} onClick={() => answerHandler(answer)}>

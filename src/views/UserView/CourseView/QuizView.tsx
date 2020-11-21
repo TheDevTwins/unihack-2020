@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { Pagination } from 'antd';
+import { Button, Pagination } from 'antd';
 
 import { StudentContext } from 'contexts';
 import QuestionView from './QuestionView';
@@ -14,6 +14,8 @@ const QuizView: React.FC = () => {
   const [answers, setAnswers] = useState(Array<string>(quiz?.questions.length).fill(''));
   const [questionIndex, setQuestionIndex] = useState(0);
 
+  const [finished, setFinished] = useState(false);
+
   if (!quiz) return <div>Loading...</div>;
 
   const handleAnswer = (answer: string) => {
@@ -24,6 +26,13 @@ const QuizView: React.FC = () => {
     ]);
   };
 
+  const totalQuestions = quiz.questions.length;
+  const correctCount = answers.reduce(
+    (acc, curr, index) => acc + Number(curr === quiz.questions[index].correctAnswer),
+    0
+  );
+  const score = ((correctCount / totalQuestions) * 100).toFixed(2);
+
   return (
     <div className="quiz">
       <h3 className="quiz__title">{quiz.title}</h3>
@@ -31,6 +40,7 @@ const QuizView: React.FC = () => {
         question={quiz.questions[questionIndex]}
         prevAnswer={answers[questionIndex]}
         answerHandler={handleAnswer}
+        finished={finished}
       />
       <Pagination
         current={questionIndex + 1}
@@ -38,6 +48,15 @@ const QuizView: React.FC = () => {
         pageSize={1}
         total={quiz.questions.length}
       />
+      <br />
+      <Button type="primary" onClick={() => setFinished(true)}>
+        Finish Quiz
+      </Button>
+      {finished && (
+        <div>
+          Your results: {correctCount}/{totalQuestions} ({score}%)
+        </div>
+      )}
     </div>
   );
 };
