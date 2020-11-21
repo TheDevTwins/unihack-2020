@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { TeacherContext } from 'contexts';
@@ -11,12 +11,14 @@ const LessonEdit: React.FC = () => {
 
   const lesson = getLessonById(lessonId);
 
+  const [newTitle, setNewTitle] = useState(lesson.title);
+
   return (
     <div>
-      {lesson.title}
+      <input type="text" value={newTitle} onChange={(e) => setNewTitle(e.target.value)} />
       <TextEditor
         initialValue={lesson.content}
-        onSave={(content) => updateLesson(lessonId, { content })}
+        onSave={(content) => updateLesson(lessonId, { content, title: newTitle })}
       />
     </div>
   );
