@@ -91,7 +91,7 @@ const Browser: React.FC = () => {
   };
 
   return (
-    <div className="Browser">
+    <div className="browser">
       {/* Select data type */}
       <Select
         defaultValue={dataType}
@@ -112,6 +112,7 @@ const Browser: React.FC = () => {
       <Select
         showSearch
         style={{ width: 200 }}
+        value={selectedTag || undefined}
         placeholder="Sort by tag"
         optionFilterProp="children"
         filterOption={(input, option) =>
@@ -128,6 +129,7 @@ const Browser: React.FC = () => {
         range
         min={currentPrices.min}
         max={currentPrices.max}
+        value={selectedPrices as any}
         defaultValue={[currentPrices.min, currentPrices.max]}
         onChange={setSelectedPrices}
       />
@@ -135,6 +137,7 @@ const Browser: React.FC = () => {
       <Select
         showSearch
         style={{ width: 200 }}
+        value={selectedDifficulty == -1 ? undefined : selectedDifficulty}
         placeholder="Sort by difficulty"
         optionFilterProp="children"
         filterOption={(input, option) =>
@@ -146,6 +149,17 @@ const Browser: React.FC = () => {
         <Select.Option value={MEDIUM}>Medium</Select.Option>
         <Select.Option value={HARD}>Hard</Select.Option>
       </Select>
+
+      <div
+        className="browser__clear"
+        onClick={() => {
+          setSelectedPrices([0, 0]);
+          setSelectedDifficulty(-1);
+          setSelectedTag('');
+        }}
+      >
+        Clear
+      </div>
 
       <div className="CoursesList">
         <div className="main wrapper">

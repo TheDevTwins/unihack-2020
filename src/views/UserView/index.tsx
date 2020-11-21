@@ -8,7 +8,7 @@ import Browser from './Browser';
 
 const UserView: React.FC = () => {
   return (
-    <div className="header">
+    <div>
       <Header
         buttons={[
           {
@@ -25,6 +25,7 @@ const UserView: React.FC = () => {
           },
         ]}
       />
+
       <div className="wrapper">
         <Switch>
           <Route path={`/programs`}>
