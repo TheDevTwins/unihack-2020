@@ -37,8 +37,18 @@ export type Metadata = {
   price: number;
 };
 
-export type Lesson = { id: string; title: string; content: string };
+export const MULTIPLE_CHOICE = 0;
 
-export type Course = Metadata & { lessonIds: string[] };
+export type Question = { id: string; description: string } & {
+  questionType: number;
+  correctAnswer: string;
+  otherAnswers: string[];
+};
+
+export type Quiz = { id: string; description: string; questions: Question[]; courseId: string };
+
+export type Lesson = { id: string; title: string; content: string; courseId: string };
+
+export type Course = Metadata & {};
 
 export type Program = Metadata & { courseIds: string[] };

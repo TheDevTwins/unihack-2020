@@ -38,14 +38,11 @@ export const TeacherProvider: React.FC = ({ children }) => {
   });
 
   const [selectedCourseId, setSelectedCourseId] = useState('');
-  const selectedCourse = ownCourses?.find((item) => item.id === selectedCourseId) || (undefined as any);
+  const selectedCourse =
+    ownCourses?.find((item) => item.id === selectedCourseId) || (undefined as any);
 
   const lessonsRef = projectFirestore.collection('lessons');
-  const lessonsQuery = lessonsRef.where(
-    firebase.firestore.FieldPath.documentId(),
-    'in',
-    selectedCourse?.lessonIds || ['1']
-  );
+  const lessonsQuery = lessonsRef.where('courseId', '==', selectedCourse?.id || '1');
   const [lessons, fetchingLessons] = useCollectionData<Lesson>(lessonsQuery, { idField: 'id' });
 
   const createCourse = async (title: string) => {
@@ -77,11 +74,7 @@ export const TeacherProvider: React.FC = ({ children }) => {
 
   const createNewLesson = async (courseId: string, title: string) => {
     const lessonRef = projectFirestore.collection('lessons').doc();
-    await lessonRef.set({ title, content: '<p><br></p>' });
-
-    const courseRef = projectFirestore.doc(`/courses/${courseId}`);
-    // add lessonId to lessonIds array
-    await courseRef.update({ lessonIds: firebase.firestore.FieldValue.arrayUnion(lessonRef.id) });
+    await lessonRef.set({ title, content: '<p><br></p>', courseId });
   };
 
   return (

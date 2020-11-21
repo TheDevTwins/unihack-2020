@@ -60,11 +60,7 @@ export const StudentProvider: React.FC = ({ children }) => {
     ownCourses?.find((item) => item.id === selectedCourseId) || (undefined as any);
 
   const lessonsRef = projectFirestore.collection('lessons');
-  const lessonsQuery = lessonsRef.where(
-    firebase.firestore.FieldPath.documentId(),
-    'in',
-    selectedCourse?.lessonIds || ['1']
-  );
+  const lessonsQuery = lessonsRef.where('courseId', '==', selectedCourse?.id || '1');
   const [lessons, fetchingLessons] = useCollectionData<Lesson>(lessonsQuery, { idField: 'id' });
 
   const selectCourse = (courseId: string) => {
