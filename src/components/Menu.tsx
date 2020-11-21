@@ -9,13 +9,13 @@ type props = {
 };
 
 const Menu: React.FC<props> = ({ buttons }) => {
-  const location = useLocation();
+  const { pathname } = useLocation();
 
   return (
     <div className="menu">
       {buttons?.map((btn) => {
         return (
-          <div className={`menu__item ${location.pathname === btn.url ? 'active' : ''}`}>
+          <div className={`menu__item ${pathname.startsWith(btn.url) ? 'active' : ''}`}>
             <Link to={btn.url}>{btn.text}</Link>
           </div>
         );
