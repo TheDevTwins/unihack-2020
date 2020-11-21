@@ -1,8 +1,14 @@
 import React, { useContext } from 'react';
 
-import { UserContext, TeacherProvider, STUDENT, StudentProvider } from 'contexts';
-
-import { TEACHER } from './types';
+import {
+  UserContext,
+  STUDENT,
+  TEACHER,
+  ORGANIZATION,
+  StudentProvider,
+  TeacherProvider,
+  OrganizationProvider,
+} from 'contexts';
 
 const UserTypeContextProvider: React.FC = ({ children }) => {
   const { user } = useContext(UserContext);
@@ -14,6 +20,8 @@ const UserTypeContextProvider: React.FC = ({ children }) => {
       return <StudentProvider>{children}</StudentProvider>;
     case TEACHER:
       return <TeacherProvider>{children}</TeacherProvider>;
+    case ORGANIZATION:
+      return <OrganizationProvider>{children}</OrganizationProvider>;
     default:
       return <p>invalid userType "{user.userType}"</p>;
   }
