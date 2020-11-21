@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 import { Header } from 'components';
-import CourseList from './CoursesList';
+import CourseList from './CourseList';
 import ProgramsList from './ProgramsList';
 
 const UserView: React.FC = () => {
