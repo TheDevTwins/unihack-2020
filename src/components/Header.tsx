@@ -5,7 +5,7 @@ import { Logo, Menu, AccountDetails } from 'components';
 import { UserContext } from 'contexts';
 
 type Props = {
-  buttons: { text: string; url: string }[];
+  buttons?: { text: string; url: string }[];
 };
 
 const Header: React.FC<Props> = ({ buttons }) => {
