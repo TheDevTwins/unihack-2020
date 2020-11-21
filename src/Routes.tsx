@@ -1,13 +1,16 @@
 import React, { useContext } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 
-import { UserContext } from 'contexts';
+import { UserContext, STUDENT, TEACHER, ORGANIZATION } from 'contexts';
 
 import LoginMock from './views/LoginMock';
 import UserView from './views/UserView';
+import TeacherView from './views/TeacherView';
+import OrganizationView from './views/OrganizationView';
 
 const Routes: React.FC = () => {
   const { user, loading } = useContext(UserContext);
+  const user_type = user?.user_type;
 
   if (loading) return <p>loading</p>;
 
@@ -23,7 +26,9 @@ const Routes: React.FC = () => {
   const Content = (
     <Switch>
       <Route path="/">
-        <UserView />
+        {user_type === STUDENT && <UserView />}
+        {user_type === TEACHER && <TeacherView />}
+        {user_type === ORGANIZATION && <OrganizationView />}
       </Route>
       <Redirect to="/" />
     </Switch>
