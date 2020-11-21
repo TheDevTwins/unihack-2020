@@ -9,7 +9,7 @@ import { projectFirestore } from 'firebase_config';
 
 type ContextProps = {
   fetching: boolean;
-  courses: Course[];
+  ownCourses: Course[];
   error: any;
   createCourse: (title: string) => void;
   updateCourseDetails: (id: string, data: Partial<Course>) => void;
@@ -23,7 +23,7 @@ export const TeacherProvider: React.FC = ({ children }) => {
 
   const coursesRef = projectFirestore.collection('courses');
   const query = coursesRef.where('creatorUid', '==', creatorUid);
-  const [courses, fetching, error] = useCollectionData<Course>(query, { idField: 'id' });
+  const [ownCourses, fetching, error] = useCollectionData<Course>(query, { idField: 'id' });
 
   const createCourse = async (title: string) => {
     const newCourseRef = projectFirestore.collection('courses').doc();
@@ -39,7 +39,7 @@ export const TeacherProvider: React.FC = ({ children }) => {
     <TeacherContext.Provider
       value={{
         fetching,
-        courses: courses || [],
+        ownCourses: ownCourses || [],
         error,
         createCourse,
         updateCourseDetails,
