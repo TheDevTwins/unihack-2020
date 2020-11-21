@@ -16,6 +16,7 @@ type ContextProps = {
   error: any;
   createProgram: (title: string, courseIds: string[]) => void;
   updateProgramDetails: (id: string, data: Partial<Program>) => void;
+  getProgramById: (id: string) => Program;
 };
 
 export const OrganizationContext = createContext<ContextProps>({} as ContextProps);
@@ -47,6 +48,10 @@ export const OrganizationProvider: React.FC = ({ children }) => {
     await programRef.update(data);
   };
 
+  const getProgramById = (id: string) => {
+    return ownPrograms?.find((item) => item.id === id) || (undefined as any);
+  };
+
   return (
     <OrganizationContext.Provider
       value={{
@@ -57,6 +62,7 @@ export const OrganizationProvider: React.FC = ({ children }) => {
         error: false,
         createProgram,
         updateProgramDetails,
+        getProgramById,
       }}
     >
       {children}
