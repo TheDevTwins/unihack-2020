@@ -8,12 +8,17 @@ type Student = {
   programIds: string[];
 };
 
+type Teacher = {
+  organizationId: string;
+};
+
 export type User = {
   uid: string;
   email: string;
   displayName: string;
   userType: number;
-} & Student;
+} & Student &
+  Teacher;
 
 export const EASY = 0;
 export const MEDIUM = 1;
@@ -22,6 +27,7 @@ export const HARD = 2;
 export type Metadata = {
   id: string;
   creatorUid: string;
+  organizationId: string;
   title: string;
   description: string;
   tags: string[];
