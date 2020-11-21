@@ -39,7 +39,7 @@ export type Metadata = {
 
 export const MULTIPLE_CHOICE = 0;
 
-export type Question = { id: string; description: string } & {
+export type Question = { description: string } & {
   questionType: number;
   correctAnswer: string;
   otherAnswers: string[];

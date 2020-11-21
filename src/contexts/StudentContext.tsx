@@ -2,7 +2,7 @@ import React, { createContext, useEffect, useState, useContext } from 'react';
 
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 
-import { Course, Lesson, Program } from './types';
+import { Course, Lesson, Quiz, Program } from './types';
 
 import { UserContext } from './UserContext';
 import { projectFirestore } from 'firebase_config';
@@ -15,11 +15,13 @@ type ContextProps = {
   allCourses: Course[];
   allPrograms: Program[];
   lessons: Lesson[];
+  quizzes: Quiz[];
   error: any;
   selectedCourse: Course;
   selectCourse: (courseId: string) => void;
   getCourseById: (id: string) => Course;
   getLessonById: (id: string) => Lesson;
+  getQuizById: (id: string) => Quiz;
   buyCourse: (courseId: string) => Promise<void>;
   buyProgram: (programId: string) => Promise<void>;
   removeCourse: (courseId: string) => Promise<void>;
@@ -67,6 +69,10 @@ export const StudentProvider: React.FC = ({ children }) => {
   const lessonsQuery = lessonsRef.where('courseId', '==', selectedCourse?.id || '1');
   const [lessons, fetchingLessons] = useCollectionData<Lesson>(lessonsQuery, { idField: 'id' });
 
+  const quizzesRef = projectFirestore.collection('quizzes');
+  const quizzesQuery = quizzesRef.where('courseId', '==', selectedCourse?.id || '1');
+  const [quizzes, fetchingQuizzes] = useCollectionData<Quiz>(quizzesQuery, { idField: 'id' });
+
   const selectCourse = (courseId: string) => {
     setSelectedCourseId(courseId);
   };
@@ -77,6 +83,10 @@ export const StudentProvider: React.FC = ({ children }) => {
 
   const getLessonById = (id: string) => {
     return lessons?.find((item) => item.id === id) || ({} as Lesson);
+  };
+
+  const getQuizById = (id: string) => {
+    return quizzes?.find((item) => item.id === id) || ({} as Quiz);
   };
 
   const buyCourse = async (courseId: string) => {
@@ -95,12 +105,9 @@ export const StudentProvider: React.FC = ({ children }) => {
 
   const buyProgram = async (programId: string) => {
     const userRef = projectFirestore.doc(`/users/${user.uid}`);
-    console.log('here');
     await userRef.update({
       programIds: firebase.firestore.FieldValue.arrayUnion(programId),
     });
-    const data = await userRef.get();
-    console.log(data.data());
   };
 
   const removeProgram = async (programId: string) => {
@@ -115,17 +122,19 @@ export const StudentProvider: React.FC = ({ children }) => {
   return (
     <StudentContext.Provider
       value={{
-        fetching: fetchingCourses || fetchingPrograms || fetchingLessons,
+        fetching: fetchingCourses || fetchingPrograms || fetchingLessons || fetchingQuizzes,
         ownCourses: ownCourses || [],
         ownPrograms: ownPrograms || [],
         allCourses: allCourses || [],
         allPrograms: allPrograms || [],
         lessons: lessons || [],
+        quizzes: quizzes || [],
         error: false,
         selectedCourse,
         selectCourse,
         getCourseById,
         getLessonById,
+        getQuizById,
         buyCourse,
         buyProgram,
         removeCourse,
