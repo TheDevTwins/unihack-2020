@@ -6,7 +6,7 @@ import { BarChartOutlined, ClockCircleOutlined } from '@ant-design/icons';
 import { Course, StudentContext } from 'contexts';
 
 const CourseList: React.FC = () => {
-  const { allCourses } = useContext(StudentContext);
+  const { ownCourses } = useContext(StudentContext);
 
   const DIFFICULTIES = ['Easy', 'Medium', 'Hard'];
 
@@ -65,7 +65,7 @@ const CourseList: React.FC = () => {
         <List
           itemLayout="vertical"
           size="large"
-          dataSource={allCourses}
+          dataSource={ownCourses}
           renderItem={(item) => <List.Item> {makeListItem(item)} </List.Item>}
         />
       </div>
