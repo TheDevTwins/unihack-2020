@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 
-import { UserContext, TeacherProvider } from 'contexts';
+import { UserContext, TeacherProvider, STUDENT, StudentProvider } from 'contexts';
 
 import { TEACHER } from './types';
 
@@ -10,6 +10,8 @@ const UserTypeContextProvider: React.FC = ({ children }) => {
   if (!user) return <div>{children}</div>;
 
   switch (user.user_type) {
+    case STUDENT:
+      return <StudentProvider>{children}</StudentProvider>;
     case TEACHER:
       return <TeacherProvider>{children}</TeacherProvider>;
     default:
