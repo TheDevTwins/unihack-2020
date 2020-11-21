@@ -78,15 +78,15 @@ export const StudentProvider: React.FC = ({ children }) => {
   };
 
   const getCourseById = (id: string) => {
-    return ownCourses?.find((item) => item.id === id) || ({} as Course);
+    return ownCourses?.find((item) => item.id === id) || (undefined as any);
   };
 
   const getLessonById = (id: string) => {
-    return lessons?.find((item) => item.id === id) || ({} as Lesson);
+    return lessons?.find((item) => item.id === id) || (undefined as any);
   };
 
   const getQuizById = (id: string) => {
-    return quizzes?.find((item) => item.id === id) || ({} as Quiz);
+    return quizzes?.find((item) => item.id === id) || (undefined as any);
   };
 
   const buyCourse = async (courseId: string) => {

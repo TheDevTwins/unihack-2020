@@ -10,7 +10,7 @@ const QuizView: React.FC = () => {
   const { quizId } = useParams<{ quizId: string }>();
   const quiz = getQuizById(quizId);
 
-  const [answers, setAnswers] = useState(Array<string>(quiz.questions?.length).fill(''));
+  const [answers, setAnswers] = useState(Array<string>(quiz?.questions.length).fill(''));
   const [questionIndex, setQuestionIndex] = useState(0);
 
   if (!quiz) return <div>Loading...</div>;
