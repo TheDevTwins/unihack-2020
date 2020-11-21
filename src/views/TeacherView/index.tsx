@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 
 import { Header } from 'components';
 import CourseList from './CourseList';
+import CourseView from './CourseView';
 
 const TeacherView: React.FC = () => {
   return (
@@ -16,7 +17,9 @@ const TeacherView: React.FC = () => {
         ]}
       />
       <Switch>
-        <Route path={`/courses/:courseId`}>access course</Route>
+        <Route path={`/courses/:courseId`}>
+          <CourseView />
+        </Route>
         <Route path={`/courses`}>
           <CourseList />
         </Route>

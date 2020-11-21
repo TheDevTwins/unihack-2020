@@ -13,6 +13,7 @@ type ContextProps = {
   error: any;
   createCourse: (title: string) => void;
   updateCourseDetails: (id: string, data: Partial<Course>) => void;
+  getCourseById: (id: string) => Course;
 };
 
 export const TeacherContext = createContext<ContextProps>({} as ContextProps);
@@ -35,6 +36,10 @@ export const TeacherProvider: React.FC = ({ children }) => {
     await courseRef.update(data);
   };
 
+  const getCourseById = (id: string) => {
+    return ownCourses?.find((item) => item.id === id) || ({} as any);
+  };
+
   return (
     <TeacherContext.Provider
       value={{
@@ -43,6 +48,7 @@ export const TeacherProvider: React.FC = ({ children }) => {
         error,
         createCourse,
         updateCourseDetails,
+        getCourseById,
       }}
     >
       {children}
