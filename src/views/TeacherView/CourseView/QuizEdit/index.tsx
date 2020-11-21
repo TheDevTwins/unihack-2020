@@ -53,36 +53,40 @@ const QuizEdit: React.FC = () => {
             return (
               <>
                 {fields.map((field) => (
-                  <Space key={field.key}>
-                    <Form.Item
-                      name={[field.name, 'description']}
-                      label="Description"
-                      rules={[{ required: true }]}
-                    >
-                      <Input.TextArea />
-                    </Form.Item>
-                    <Form.Item
-                      name={[field.name, 'correctAnswer']}
-                      label="Correct answer"
-                      rules={[{ required: true }]}
-                    >
-                      <Input />
-                    </Form.Item>
-                    <Form.Item
-                      name={[field.name, 'wrongAnswer1']}
-                      label="Wrong answer"
-                      rules={[{ required: true }]}
-                    >
-                      <Input />
-                    </Form.Item>
-                    <Form.Item name={[field.name, 'wrongAnswer2']} label="Wrong answer">
-                      <Input />
-                    </Form.Item>
-                    <Form.Item name={[field.name, 'wrongAnswer3']} label="Wrong answer">
-                      <Input />
-                    </Form.Item>
-                    <MinusCircleOutlined onClick={() => remove(field.name)} />
-                  </Space>
+                  <>
+                    <div>
+                      <Form.Item
+                        name={[field.name, 'description']}
+                        label="Description"
+                        rules={[{ required: true }]}
+                      >
+                        <Input.TextArea />
+                      </Form.Item>
+                    </div>
+                    <Space>
+                      <Form.Item
+                        name={[field.name, 'correctAnswer']}
+                        label="Correct answer"
+                        rules={[{ required: true }]}
+                      >
+                        <Input />
+                      </Form.Item>
+                      <Form.Item
+                        name={[field.name, 'wrongAnswer1']}
+                        label="Wrong answer"
+                        rules={[{ required: true }]}
+                      >
+                        <Input />
+                      </Form.Item>
+                      <Form.Item name={[field.name, 'wrongAnswer2']} label="Wrong answer">
+                        <Input />
+                      </Form.Item>
+                      <Form.Item name={[field.name, 'wrongAnswer3']} label="Wrong answer">
+                        <Input />
+                      </Form.Item>
+                      <MinusCircleOutlined onClick={() => remove(field.name)} />
+                    </Space>
+                  </>
                 ))}
                 <Form.Item>
                   <Button onClick={() => add()}>
