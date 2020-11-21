@@ -5,7 +5,7 @@ import { Button, Form, Input, InputNumber, Select } from 'antd';
 
 import { OrganizationContext } from 'contexts';
 
-const CourseDetails: React.FC = () => {
+const EditProgram: React.FC = () => {
   const { getProgramById, updateProgramDetails } = useContext(OrganizationContext);
 
   const [form] = Form.useForm();
@@ -56,4 +56,4 @@ const CourseDetails: React.FC = () => {
   );
 };
 
-export default CourseDetails;
+export default EditProgram;
