@@ -8,7 +8,7 @@ import Browser from './Browser';
 
 const UserView: React.FC = () => {
   return (
-    <div>
+    <div className="userView">
       <Header
         buttons={[
           {

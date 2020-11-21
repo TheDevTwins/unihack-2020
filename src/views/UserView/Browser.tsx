@@ -137,7 +137,7 @@ const Browser: React.FC = () => {
       <Select
         showSearch
         style={{ width: 200 }}
-        value={selectedDifficulty == -1 ? undefined : selectedDifficulty}
+        value={selectedDifficulty === -1 ? undefined : selectedDifficulty}
         placeholder="Sort by difficulty"
         optionFilterProp="children"
         filterOption={(input, option) =>
