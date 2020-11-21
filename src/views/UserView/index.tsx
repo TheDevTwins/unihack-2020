@@ -1,15 +1,30 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
-import Header from './Header';
-import CourseList from './CoursesList';
+import { Header } from 'components';
+import CourseList from './CourseList';
 import ProgramsList from './ProgramsList';
 import Browser from './Browser';
 
 const UserView: React.FC = () => {
   return (
-    <div>
-      <Header />
+    <div className="header">
+      <Header
+        buttons={[
+          {
+            text: 'Programs',
+            url: '/programs',
+          },
+          {
+            text: 'Courses',
+            url: '/courses',
+          },
+          {
+            text: 'Discover new',
+            url: '/discover',
+          },
+        ]}
+      />
       <div className="wrapper">
         <Switch>
           <Route path={`/programs`}>

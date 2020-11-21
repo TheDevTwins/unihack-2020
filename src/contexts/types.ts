@@ -12,7 +12,7 @@ export type User = {
   uid: string;
   email: string;
   displayName: string;
-  user_type: number;
+  userType: number;
 } & Student;
 
 export const EASY = 0;

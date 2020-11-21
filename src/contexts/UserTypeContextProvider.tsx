@@ -1,22 +1,30 @@
 import React, { useContext } from 'react';
 
-import { UserContext, TeacherProvider, STUDENT, StudentProvider } from 'contexts';
-
-import { TEACHER } from './types';
+import {
+  UserContext,
+  STUDENT,
+  TEACHER,
+  ORGANIZATION,
+  StudentProvider,
+  TeacherProvider,
+  OrganizationProvider,
+} from 'contexts';
 
 const UserTypeContextProvider: React.FC = ({ children }) => {
   const { user } = useContext(UserContext);
 
   if (!user) return <div>{children}</div>;
 
-  switch (user.user_type) {
+  switch (user.userType) {
     case STUDENT:
     case 0:
       return <StudentProvider>{children}</StudentProvider>;
     case TEACHER:
       return <TeacherProvider>{children}</TeacherProvider>;
+    case ORGANIZATION:
+      return <OrganizationProvider>{children}</OrganizationProvider>;
     default:
-      return <p>invalid user_type "{user.user_type}"</p>;
+      return <p>invalid userType "{user.userType}"</p>;
   }
 };
 
