@@ -2,14 +2,16 @@ import React, { createContext, useEffect, useState, useContext } from 'react';
 
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 
-import { Course } from './types';
+import { Course, Lesson } from './types';
 
 import { UserContext } from './UserContext';
 import { projectFirestore } from 'firebase_config';
+import firebase from 'firebase';
 
 type ContextProps = {
   fetching: boolean;
   ownCourses: Course[];
+  lessons: Lesson[];
   error: any;
   createCourse: (title: string) => void;
   updateCourseDetails: (id: string, data: Partial<Course>) => void;
@@ -23,8 +25,21 @@ export const TeacherProvider: React.FC = ({ children }) => {
   const creatorUid = user.uid;
 
   const coursesRef = projectFirestore.collection('courses');
-  const query = coursesRef.where('creatorUid', '==', creatorUid);
-  const [ownCourses, fetching, error] = useCollectionData<Course>(query, { idField: 'id' });
+  const ownCoursesQuery = coursesRef.where('creatorUid', '==', creatorUid);
+  const [ownCourses, fetchingOwnCourses] = useCollectionData<Course>(ownCoursesQuery, {
+    idField: 'id',
+  });
+
+  const [selectedCourseId, setSelectedCourseId] = useState('');
+  const selectedCourse = ownCourses?.find((item) => item.id === selectedCourseId) || ({} as Course);
+
+  const lessonsRef = projectFirestore.collection('lessons');
+  const lessonsQuery = lessonsRef.where(
+    firebase.firestore.FieldPath.documentId(),
+    'in',
+    selectedCourse.lessonIds || ['1']
+  );
+  const [lessons, fetchingLessons] = useCollectionData<Lesson>(lessonsQuery, { idField: 'id' });
 
   const createCourse = async (title: string) => {
     const newCourseRef = projectFirestore.collection('courses').doc();
@@ -37,15 +52,18 @@ export const TeacherProvider: React.FC = ({ children }) => {
   };
 
   const getCourseById = (id: string) => {
-    return ownCourses?.find((item) => item.id === id) || ({} as any);
+    const course = ownCourses?.find((item) => item.id === id) || ({} as Course);
+    setSelectedCourseId(course.id);
+    return course;
   };
 
   return (
     <TeacherContext.Provider
       value={{
-        fetching,
+        fetching: fetchingLessons || fetchingOwnCourses,
         ownCourses: ownCourses || [],
-        error,
+        lessons: lessons || [],
+        error: false,
         createCourse,
         updateCourseDetails,
         getCourseById,
