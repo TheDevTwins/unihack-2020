@@ -6,6 +6,7 @@ import CourseList from './CourseList';
 import ProgramsList from './ProgramsList';
 import Browser from './Browser';
 import CourseView from './CourseView';
+import QuizView from './CourseView/QuizView';
 
 const UserView: React.FC = () => {
   return (
