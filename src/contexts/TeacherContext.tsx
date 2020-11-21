@@ -17,7 +17,7 @@ type ContextProps = {
   lessons: Lesson[];
   quizzes: Quiz[];
   error: any;
-  createCourse: (title: string) => void;
+  createCourse: () => void;
   updateCourseDetails: (id: string, data: Partial<Course>) => void;
   getCourseById: (id: string) => Course;
   selectCourse: (courseId: string) => void;
@@ -52,9 +52,10 @@ export const TeacherProvider: React.FC = ({ children }) => {
   const quizzesQuery = quizzesRef.where('courseId', '==', selectedCourse?.id || '1');
   const [quizzes, fetchingQuizzes] = useCollectionData<Quiz>(quizzesQuery, { idField: 'id' });
 
-  const createCourse = async (title: string) => {
+  const createCourse = async () => {
     const newCourseRef = projectFirestore.collection('courses').doc();
-    await newCourseRef.set({ title, creatorUid: user.uid, organizationId: user.organizationId });
+    await newCourseRef.set({ creatorUid: user.uid, organizationId: user.organizationId });
+    console.log(newCourseRef.id);
   };
 
   const updateCourseDetails = async (id: string, data: Partial<Course>) => {

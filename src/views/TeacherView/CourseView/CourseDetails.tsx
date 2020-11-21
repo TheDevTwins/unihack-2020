@@ -9,7 +9,7 @@ const CourseDetails: React.FC = () => {
 
   const [form] = Form.useForm();
 
-  const initialValues = { ...selectedCourse, tags: selectedCourse.tags.join(',') };
+  const initialValues = { ...selectedCourse, tags: selectedCourse.tags?.join(',') };
 
   return (
     <Form
