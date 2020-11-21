@@ -8,14 +8,18 @@ import { UserContext } from './UserContext';
 import { projectFirestore } from 'firebase_config';
 import firebase from 'firebase';
 
+import { TextEditor } from 'components';
+
 type ContextProps = {
   fetching: boolean;
   ownCourses: Course[];
+  selectedCourse: Course;
   lessons: Lesson[];
   error: any;
   createCourse: (title: string) => void;
   updateCourseDetails: (id: string, data: Partial<Course>) => void;
   getCourseById: (id: string) => Course;
+  createNewLesson: (courseId: string, title: string) => void;
 };
 
 export const TeacherContext = createContext<ContextProps>({} as ContextProps);
@@ -57,16 +61,27 @@ export const TeacherProvider: React.FC = ({ children }) => {
     return course;
   };
 
+  const createNewLesson = async (courseId: string, title: string) => {
+    const lessonRef = projectFirestore.collection('lessons').doc();
+    await lessonRef.set({ title, content: '<p><br></p>' });
+
+    const courseRef = projectFirestore.doc(`/courses/${courseId}`);
+    // add lessonId to lessonIds array
+    await courseRef.update({ lessonIds: firebase.firestore.FieldValue.arrayUnion(lessonRef.id) });
+  };
+
   return (
     <TeacherContext.Provider
       value={{
         fetching: fetchingLessons || fetchingOwnCourses,
         ownCourses: ownCourses || [],
+        selectedCourse,
         lessons: lessons || [],
         error: false,
         createCourse,
         updateCourseDetails,
         getCourseById,
+        createNewLesson,
       }}
     >
       {children}

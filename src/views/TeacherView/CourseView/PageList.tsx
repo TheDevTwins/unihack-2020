@@ -1,10 +1,12 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { TeacherContext } from 'contexts';
 
 const PageList: React.FC = () => {
-  const { lessons } = useContext(TeacherContext);
+  const { lessons, createNewLesson, selectedCourse } = useContext(TeacherContext);
+
+  const [newTitle, setNewTitle] = useState('');
 
   return (
     <div>
@@ -16,7 +18,8 @@ const PageList: React.FC = () => {
           </li>
         ))}
       </ul>
-      <button>Create new</button>
+      <input type="text" value={newTitle} onChange={(e) => setNewTitle(e.target.value)} />
+      <button onClick={() => createNewLesson(selectedCourse.id, newTitle)}>Create new</button>
     </div>
   );
 };
