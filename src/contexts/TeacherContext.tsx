@@ -2,7 +2,7 @@ import React, { createContext, useEffect, useState, useContext } from 'react';
 
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 
-import { Course, Lesson } from './types';
+import { Course, Lesson, Question, Quiz } from './types';
 
 import { UserContext } from './UserContext';
 import { projectFirestore } from 'firebase_config';
@@ -15,6 +15,7 @@ type ContextProps = {
   ownCourses: Course[];
   selectedCourse: Course;
   lessons: Lesson[];
+  quizzes: Quiz[];
   error: any;
   createCourse: (title: string) => void;
   updateCourseDetails: (id: string, data: Partial<Course>) => void;
@@ -23,6 +24,8 @@ type ContextProps = {
   getLessonById: (id: string) => Lesson;
   createNewLesson: (courseId: string, title: string) => void;
   updateLesson: (id: string, data: Partial<Lesson>) => void;
+  createQuiz: (courseId: string) => void;
+  editQuiz: (id: string, description: string, questions: Question[]) => void;
 };
 
 export const TeacherContext = createContext<ContextProps>({} as ContextProps);
@@ -44,6 +47,10 @@ export const TeacherProvider: React.FC = ({ children }) => {
   const lessonsRef = projectFirestore.collection('lessons');
   const lessonsQuery = lessonsRef.where('courseId', '==', selectedCourse?.id || '1');
   const [lessons, fetchingLessons] = useCollectionData<Lesson>(lessonsQuery, { idField: 'id' });
+
+  const quizzesRef = projectFirestore.collection('quizzes');
+  const quizzesQuery = quizzesRef.where('courseId', '==', selectedCourse?.id || '1');
+  const [quizzes, fetchingQuizzes] = useCollectionData<Quiz>(quizzesQuery, { idField: 'id' });
 
   const createCourse = async (title: string) => {
     const newCourseRef = projectFirestore.collection('courses').doc();
@@ -77,6 +84,16 @@ export const TeacherProvider: React.FC = ({ children }) => {
     await lessonRef.set({ title, content: '<p><br></p>', courseId });
   };
 
+  const createQuiz = async (courseId: string) => {
+    const quizRef = projectFirestore.collection('quizzes').doc();
+    await quizRef.set({ courseId, description: '', questions: [] });
+  };
+
+  const editQuiz = async (id: string, description: string, questions: Question[]) => {
+    const quizRef = projectFirestore.doc(`/quizzes/${id}`);
+    await quizRef.update({ description, questions });
+  };
+
   return (
     <TeacherContext.Provider
       value={{
@@ -84,6 +101,7 @@ export const TeacherProvider: React.FC = ({ children }) => {
         ownCourses: ownCourses || [],
         selectedCourse,
         lessons: lessons || [],
+        quizzes: quizzes || [],
         error: false,
         createCourse,
         updateCourseDetails,
@@ -92,6 +110,8 @@ export const TeacherProvider: React.FC = ({ children }) => {
         getLessonById,
         createNewLesson,
         updateLesson,
+        createQuiz,
+        editQuiz,
       }}
     >
       {children}
