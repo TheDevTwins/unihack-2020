@@ -10,7 +10,7 @@ import OrganizationView from './views/OrganizationView';
 
 const Routes: React.FC = () => {
   const { user, loading } = useContext(UserContext);
-  const user_type = user?.user_type;
+  const userType = user?.userType;
 
   if (loading) return <p>loading</p>;
 
@@ -26,9 +26,9 @@ const Routes: React.FC = () => {
   const Content = (
     <Switch>
       <Route path="/">
-        {user_type === STUDENT && <UserView />}
-        {user_type === TEACHER && <TeacherView />}
-        {user_type === ORGANIZATION && <OrganizationView />}
+        {userType === STUDENT && <UserView />}
+        {userType === TEACHER && <TeacherView />}
+        {userType === ORGANIZATION && <OrganizationView />}
       </Route>
       <Redirect to="/" />
     </Switch>
