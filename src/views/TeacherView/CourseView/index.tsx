@@ -1,4 +1,5 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { Switch, Route } from 'react-router-dom';
 
 import { TeacherContext } from 'contexts';
@@ -8,7 +9,12 @@ import LessonList from './LessonList';
 import LessonEdit from './LessonEdit';
 
 const CourseView: React.FC = () => {
-  const { fetching } = useContext(TeacherContext);
+  const { courseId } = useParams<{ courseId: string }>();
+  const { fetching, selectCourse } = useContext(TeacherContext);
+
+  useEffect(() => {
+    !fetching && selectCourse(courseId);
+  }, [fetching]);
 
   if (fetching) return null;
 

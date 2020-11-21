@@ -6,7 +6,7 @@ import { TeacherContext } from 'contexts';
 import { TextEditor } from 'components';
 
 const LessonEdit: React.FC = () => {
-  const { getLessonById, updateLesson } = useContext(TeacherContext);
+  const { getLessonById, updateLesson, selectedCourse } = useContext(TeacherContext);
   const { lessonId } = useParams<{ lessonId: string }>();
 
   const lesson = getLessonById(lessonId);

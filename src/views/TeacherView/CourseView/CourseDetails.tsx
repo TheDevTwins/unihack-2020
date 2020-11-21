@@ -1,19 +1,15 @@
 import React, { useContext } from 'react';
-import { useParams } from 'react-router-dom';
 
 import { Button, Form, Input, InputNumber, Select } from 'antd';
 
 import { TeacherContext } from 'contexts';
 
 const CourseDetails: React.FC = () => {
-  const { courseId } = useParams<{ courseId: string }>();
-  const { getCourseById, updateCourseDetails } = useContext(TeacherContext);
-
-  const course = getCourseById(courseId);
+  const { selectedCourse, updateCourseDetails } = useContext(TeacherContext);
 
   const [form] = Form.useForm();
 
-  const initialValues = { ...course, tags: course.tags.join(',') };
+  const initialValues = { ...selectedCourse, tags: selectedCourse.tags.join(',') };
 
   return (
     <Form
@@ -22,7 +18,7 @@ const CourseDetails: React.FC = () => {
       onFinish={() => {
         const data = form.getFieldsValue() as any;
         data.tags = data.tags.split(',');
-        updateCourseDetails(courseId, data);
+        updateCourseDetails(selectedCourse.id, data);
       }}
     >
       <Form.Item name="title" label="Title" rules={[{ required: true }]}>

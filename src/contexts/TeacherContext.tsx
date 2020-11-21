@@ -19,6 +19,7 @@ type ContextProps = {
   createCourse: (title: string) => void;
   updateCourseDetails: (id: string, data: Partial<Course>) => void;
   getCourseById: (id: string) => Course;
+  selectCourse: (courseId: string) => void;
   getLessonById: (id: string) => Lesson;
   createNewLesson: (courseId: string, title: string) => void;
   updateLesson: (id: string, data: Partial<Lesson>) => void;
@@ -58,9 +59,11 @@ export const TeacherProvider: React.FC = ({ children }) => {
   };
 
   const getCourseById = (id: string) => {
-    const course = ownCourses?.find((item) => item.id === id) || ({} as Course);
-    setSelectedCourseId(course.id);
-    return course;
+    return ownCourses?.find((item) => item.id === id) || ({} as Course);
+  };
+
+  const selectCourse = (courseId: string) => {
+    setSelectedCourseId(courseId);
   };
 
   const getLessonById = (id: string) => {
@@ -92,6 +95,7 @@ export const TeacherProvider: React.FC = ({ children }) => {
         createCourse,
         updateCourseDetails,
         getCourseById,
+        selectCourse,
         getLessonById,
         createNewLesson,
         updateLesson,
