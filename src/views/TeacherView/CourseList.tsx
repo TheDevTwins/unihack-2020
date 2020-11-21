@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 
-import { Select, List, Button } from 'antd';
+import { List, Button } from 'antd';
 import { BarChartOutlined, ClockCircleOutlined, PlusCircleOutlined } from '@ant-design/icons';
 
 import { Course, TeacherContext } from 'contexts';
