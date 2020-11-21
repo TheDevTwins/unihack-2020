@@ -36,32 +36,6 @@ const CourseList: React.FC = () => {
   return (
     <div className="CoursesList">
       <div className="main wrapper">
-        {/*<Select*/}
-        {/*  showSearch*/}
-        {/*  style={{ width: 100 }}*/}
-        {/*  placeholder="Select a tag"*/}
-        {/*  optionFilterProp="children"*/}
-        {/*  filterOption={(input, option) =>*/}
-        {/*    option?.children.toLowerCase().indexOf(input.toLowerCase()) >= 0*/}
-        {/*  }*/}
-        {/*>*/}
-        {/*  <Select.Option value="jack">UPT</Select.Option>*/}
-        {/*  <Select.Option value="lucy">UVT</Select.Option>*/}
-        {/*</Select>*/}
-        {/*<Select*/}
-        {/*  showSearch*/}
-        {/*  style={{ width: 100 }}*/}
-        {/*  placeholder="Select a tag"*/}
-        {/*  optionFilterProp="children"*/}
-        {/*  filterOption={(input, option) =>*/}
-        {/*    option?.children.toLowerCase().indexOf(input.toLowerCase()) >= 0*/}
-        {/*  }*/}
-        {/*>*/}
-        {/*  <Select.Option value="jack">UPT</Select.Option>*/}
-        {/*  <Select.Option value="lucy">UVT</Select.Option>*/}
-        {/*</Select>*/}
-
-        {/* List of contents */}
         <List
           itemLayout="vertical"
           size="large"

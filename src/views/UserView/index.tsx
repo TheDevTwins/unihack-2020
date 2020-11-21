@@ -4,6 +4,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import { Header } from 'components';
 import CourseList from './CourseList';
 import ProgramsList from './ProgramsList';
+import Browser from './Browser';
 
 const UserView: React.FC = () => {
   return (
@@ -24,16 +25,21 @@ const UserView: React.FC = () => {
           },
         ]}
       />
-      <Switch>
-        <Route path={`/programs`}>
-          <ProgramsList />
-        </Route>
-        <Route path={`/courses`}>
-          <CourseList />
-        </Route>
-        <Route path={`/discover`}>discover</Route>
-        <Redirect to={`/programs`} />
-      </Switch>
+
+      <div className="wrapper">
+        <Switch>
+          <Route path={`/programs`}>
+            <ProgramsList />
+          </Route>
+          <Route path={`/courses`}>
+            <CourseList />
+          </Route>
+          <Route path={`/discover`}>
+            <Browser />
+          </Route>
+          <Redirect to={`/programs`} />
+        </Switch>
+      </div>
     </div>
   );
 };

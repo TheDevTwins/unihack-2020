@@ -19,7 +19,7 @@ export const EASY = 0;
 export const MEDIUM = 1;
 export const HARD = 2;
 
-type Metadata = {
+export type Metadata = {
   id: string;
   creatorUid: string;
   title: string;
@@ -28,6 +28,7 @@ type Metadata = {
   duration: number; // hours
   difficulty: number;
   thumbnailUrl: string;
+  price: number;
 };
 
 export type Lesson = { id: string; title: string; content: string };
