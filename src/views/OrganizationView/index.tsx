@@ -8,7 +8,14 @@ import CreateProgram from './CreateProgram';
 const OrganizationView: React.FC = () => {
   return (
     <div className="OrgView">
-      <Header />
+      <Header
+        buttons={[
+          {
+            text: 'Programs',
+            url: '/programs',
+          },
+        ]}
+      />
 
       <div className="wrapper">
         <Switch>

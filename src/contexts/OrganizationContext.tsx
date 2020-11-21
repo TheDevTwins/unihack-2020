@@ -33,11 +33,13 @@ export const OrganizationProvider: React.FC = ({ children }) => {
 
   const programsRef = projectFirestore.collection('programs');
   const programsQuery = programsRef.where('organizationId', '==', user.uid);
-  const [ownPrograms, fetchingPrograms] = useCollectionData<Program>(programsQuery, { idField: 'id' });
+  const [ownPrograms, fetchingPrograms] = useCollectionData<Program>(programsQuery, {
+    idField: 'id',
+  });
 
   const createProgram = async (title: string, courseIds: string[]) => {
     const newCourseRef = projectFirestore.collection('programs').doc();
-    await newCourseRef.set({ title, creatorUid: user.uid, courseIds });
+    await newCourseRef.set({ title, creatorUid: user.uid, organizationId: user.uid, courseIds });
   };
 
   const updateProgramDetails = async (id: string, data: Partial<Program>) => {
@@ -54,7 +56,7 @@ export const OrganizationProvider: React.FC = ({ children }) => {
         ownPrograms: ownPrograms || [],
         error: false,
         createProgram,
-        updateProgramDetails
+        updateProgramDetails,
       }}
     >
       {children}
