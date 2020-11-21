@@ -3,14 +3,16 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Header from './Header';
 import CourseList from './CoursesList';
+import ProgramsList from './ProgramsList';
 
 const UserView: React.FC = () => {
-  console.log('I am here');
   return (
     <div>
       <Header />
       <Switch>
-        <Route path={`/programs`}>programs</Route>
+        <Route path={`/programs`}>
+          <ProgramsList />
+        </Route>
         <Route path={`/courses`}>
           <CourseList />
         </Route>
