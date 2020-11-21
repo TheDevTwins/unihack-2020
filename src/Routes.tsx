@@ -7,31 +7,29 @@ import LoginMock from './views/LoginMock';
 import UserView from './views/UserView';
 
 const Routes: React.FC = () => {
-  const { user, logout } = useContext(UserContext);
+  const { user, loading } = useContext(UserContext);
+
+  if (loading) return <p>loading</p>;
 
   const LoginEnforcer = (
-    <>
+    <Switch>
       <Route path="/login">
         <LoginMock />
       </Route>
       <Redirect to="/login" />
-    </>
+    </Switch>
   );
 
   const Content = (
-    <>
-      <Route exact path="/">
+    <Switch>
+      <Route path="/">
         <UserView />
       </Route>
       <Redirect to="/" />
-    </>
+    </Switch>
   );
 
-  return (
-    <BrowserRouter>
-      <Switch>{user ? Content : LoginEnforcer}</Switch>
-    </BrowserRouter>
-  );
+  return <BrowserRouter>{user ? Content : LoginEnforcer}</BrowserRouter>;
 };
 
 export default Routes;
