@@ -2,7 +2,7 @@ import React, { createContext, useContext } from 'react';
 
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 
-import { Course, User } from './types';
+import { Course, Program, User } from './types';
 
 import { projectFirestore } from 'firebase_config';
 
@@ -12,6 +12,7 @@ type ContextProps = {
   fetching: boolean;
   courses: Course[];
   teachers: User[];
+  ownPrograms: Program[];
   error: any;
 };
 
@@ -28,12 +29,17 @@ export const OrganizationProvider: React.FC = ({ children }) => {
   const teachersQuery = usersRef.where('organizationId', '==', user.uid);
   const [teachers, fetchingUsers] = useCollectionData<User>(teachersQuery, { idField: 'id' });
 
+  const programsRef = projectFirestore.collection('programs');
+  const programsQuery = programsRef.where('organizationId', '==', user.uid);
+  const [ownPrograms, fetchingPrograms] = useCollectionData<Program>(programsQuery, { idField: 'id' });
+
   return (
     <OrganizationContext.Provider
       value={{
         fetching: fetchingCourses || fetchingUsers,
         courses: courses || [],
         teachers: teachers || [],
+        ownPrograms: ownPrograms || [],
         error: false,
       }}
     >
