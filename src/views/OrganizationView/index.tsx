@@ -4,14 +4,25 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import { Header } from 'components';
 import ProgramList from './ProgramList';
 import CreateProgram from './CreateProgram';
+import EditProgram from './EditProgram';
 
 const OrganizationView: React.FC = () => {
   return (
     <div className="OrgView">
-      <Header />
+      <Header
+        buttons={[
+          {
+            text: 'Programs',
+            url: '/programs',
+          },
+        ]}
+      />
 
       <div className="wrapper">
         <Switch>
+          <Route path={`/programs/:programId`}>
+            <EditProgram />
+          </Route>
           <Route path={`/programs`}>
             <ProgramList />
           </Route>

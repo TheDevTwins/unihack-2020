@@ -16,6 +16,8 @@ type ContextProps = {
   error: any;
   createProgram: (title: string, courseIds: string[]) => void;
   updateProgramDetails: (id: string, data: Partial<Program>) => void;
+  getProgramById: (id: string) => Program;
+  deleteOwnProgram: (id: string) => void;
 };
 
 export const OrganizationContext = createContext<ContextProps>({} as ContextProps);
@@ -33,16 +35,27 @@ export const OrganizationProvider: React.FC = ({ children }) => {
 
   const programsRef = projectFirestore.collection('programs');
   const programsQuery = programsRef.where('organizationId', '==', user.uid);
-  const [ownPrograms, fetchingPrograms] = useCollectionData<Program>(programsQuery, { idField: 'id' });
+  const [ownPrograms, fetchingPrograms] = useCollectionData<Program>(programsQuery, {
+    idField: 'id',
+  });
 
   const createProgram = async (title: string, courseIds: string[]) => {
     const newCourseRef = projectFirestore.collection('programs').doc();
-    await newCourseRef.set({ title, creatorUid: user.uid, courseIds });
+    await newCourseRef.set({ title, creatorUid: user.uid, organizationId: user.uid, courseIds });
   };
 
   const updateProgramDetails = async (id: string, data: Partial<Program>) => {
     const programRef = projectFirestore.doc(`/programs/${id}`);
     await programRef.update(data);
+  };
+
+  const getProgramById = (id: string) => {
+    return ownPrograms?.find((item) => item.id === id) || (undefined as any);
+  };
+
+  const deleteOwnProgram = async (id: string) => {
+    const programRef = projectFirestore.doc(`/programs/${id}`);
+    await programRef.delete();
   };
 
   return (
@@ -54,7 +67,9 @@ export const OrganizationProvider: React.FC = ({ children }) => {
         ownPrograms: ownPrograms || [],
         error: false,
         createProgram,
-        updateProgramDetails
+        updateProgramDetails,
+        getProgramById,
+        deleteOwnProgram,
       }}
     >
       {children}

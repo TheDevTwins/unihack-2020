@@ -6,7 +6,7 @@ import { BarChartOutlined, ClockCircleOutlined } from '@ant-design/icons';
 import { Program, StudentContext } from 'contexts';
 
 const CourseList: React.FC = () => {
-  const { ownPrograms } = useContext(StudentContext);
+  const { ownPrograms, removeProgram } = useContext(StudentContext);
 
   const DIFFICULTIES = ['Easy', 'Medium', 'Hard'];
 
@@ -28,6 +28,15 @@ const CourseList: React.FC = () => {
             </div>
           </div>
           <div className="listItem__description">{item.description}</div>
+        </div>
+
+        <div
+          className="listItem__buy"
+          onClick={() => {
+            removeProgram(item.id);
+          }}
+        >
+          Remove
         </div>
       </div>
     );

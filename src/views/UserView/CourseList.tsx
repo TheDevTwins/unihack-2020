@@ -7,7 +7,7 @@ import { BarChartOutlined, ClockCircleOutlined } from '@ant-design/icons';
 import { Course, StudentContext } from 'contexts';
 
 const CourseList: React.FC = () => {
-  const { ownCourses } = useContext(StudentContext);
+  const { ownCourses, removeCourse } = useContext(StudentContext);
 
   const DIFFICULTIES = ['Easy', 'Medium', 'Hard'];
 
@@ -32,6 +32,15 @@ const CourseList: React.FC = () => {
           <Button type="primary">
             <Link to={`/courses/${item.id}`}>Enter course</Link>
           </Button>
+        </div>
+
+        <div
+          className="listItem__buy"
+          onClick={() => {
+            removeCourse(item.id);
+          }}
+        >
+          Remove
         </div>
       </div>
     );

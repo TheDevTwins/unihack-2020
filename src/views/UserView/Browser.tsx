@@ -3,10 +3,10 @@ import { List, Select, Slider } from 'antd';
 import { StudentContext } from 'contexts';
 import React, { useContext, useState } from 'react';
 
-import { Course, EASY, HARD, MEDIUM, Program } from '../../contexts/types';
+import { Course, EASY, HARD, MEDIUM, Program } from 'contexts';
 
 const Browser: React.FC = () => {
-  const data = useContext(StudentContext);
+  const { allCourses, allPrograms, buyCourse, buyProgram } = useContext(StudentContext);
   const [dataType, setDataType] = useState('Programs');
   const [selectedTag, setSelectedTag] = useState('');
   const [selectedDifficulty, setSelectedDifficulty] = useState(-1);
@@ -16,8 +16,8 @@ const Browser: React.FC = () => {
   const programTags: string[] = [];
 
   [
-    { input: data.allCourses, arr: courseTags },
-    { input: data.allPrograms, arr: programTags },
+    { input: allCourses, arr: courseTags },
+    { input: allPrograms, arr: programTags },
   ].forEach((pair) => {
     pair.input.forEach((course: Course | Program) => {
       course.tags.forEach((tag) => {
@@ -39,8 +39,9 @@ const Browser: React.FC = () => {
   };
 
   // get current variables
-  const currentTags = dataType === 'Programs' ? programTags : courseTags;
-  const currentData = dataType === 'Programs' ? data.allPrograms : data.allCourses;
+  const dataTypeIndex = dataType === 'Programs' ? 0 : 1;
+  const currentTags = dataTypeIndex ? courseTags : programTags;
+  const currentData = dataTypeIndex ? allCourses : allPrograms;
 
   const currentPrices = {
     min: getRange(currentData, Math.min),
@@ -67,6 +68,15 @@ const Browser: React.FC = () => {
             </div>
           </div>
           <div className="listItem__description">{item.description}</div>
+        </div>
+
+        <div
+          className="listItem__buy"
+          onClick={() => {
+            dataTypeIndex ? buyCourse(item.id) : buyProgram(item.id);
+          }}
+        >
+          Buy
         </div>
       </div>
     );
@@ -167,7 +177,7 @@ const Browser: React.FC = () => {
             itemLayout="vertical"
             size="large"
             dataSource={filterData()}
-            renderItem={(item) => <List.Item> {makeListItem(item as any)} </List.Item>}
+            renderItem={(item, i) => <List.Item key={i}> {makeListItem(item as any)} </List.Item>}
           />
         </div>
       </div>
