@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import { TeacherContext } from 'contexts';
 
 import CourseDetails from './CourseDetails';
-import PageList from './PageList';
+import LessonList from './LessonList';
 
 const CourseView: React.FC = () => {
   const { fetching } = useContext(TeacherContext);
@@ -12,7 +12,7 @@ const CourseView: React.FC = () => {
 
   return (
     <div>
-      <CourseDetails /> <PageList />
+      <CourseDetails /> <LessonList />
     </div>
   );
 };

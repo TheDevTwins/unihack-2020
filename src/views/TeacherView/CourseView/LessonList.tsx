@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { TeacherContext } from 'contexts';
 
-const PageList: React.FC = () => {
+const LessonList: React.FC = () => {
   const { lessons, createNewLesson, selectedCourse } = useContext(TeacherContext);
 
   const [newTitle, setNewTitle] = useState('');
@@ -24,4 +24,4 @@ const PageList: React.FC = () => {
   );
 };
 
-export default PageList;
+export default LessonList;
