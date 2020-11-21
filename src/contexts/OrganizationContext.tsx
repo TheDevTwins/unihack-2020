@@ -1,30 +1,40 @@
-import React, { createContext } from 'react';
+import React, { createContext, useContext } from 'react';
 
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 
-import { Course } from './types';
+import { Course, User } from './types';
 
 import { projectFirestore } from 'firebase_config';
+
+import { UserContext } from './UserContext';
 
 type ContextProps = {
   fetching: boolean;
   courses: Course[];
+  teachers: User[];
   error: any;
 };
 
 export const OrganizationContext = createContext<ContextProps>({} as ContextProps);
 
 export const OrganizationProvider: React.FC = ({ children }) => {
+  const { user } = useContext(UserContext);
+
   const coursesRef = projectFirestore.collection('courses');
-  const query = coursesRef.limit(10);
-  const [courses, fetching, error] = useCollectionData<Course>(query, { idField: 'id' });
+  const coursesQuery = coursesRef.where('organizationId', '==', user.uid);
+  const [courses, fetchingCourses] = useCollectionData<Course>(coursesQuery, { idField: 'id' });
+
+  const usersRef = projectFirestore.collection('users');
+  const teachersQuery = usersRef.where('organizationId', '==', user.uid);
+  const [teachers, fetchingUsers] = useCollectionData<User>(teachersQuery, { idField: 'id' });
 
   return (
     <OrganizationContext.Provider
       value={{
-        fetching,
+        fetching: fetchingCourses || fetchingUsers,
         courses: courses || [],
-        error,
+        teachers: teachers || [],
+        error: false,
       }}
     >
       {children}
