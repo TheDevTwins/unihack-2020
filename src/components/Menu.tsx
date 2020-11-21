@@ -1,20 +1,25 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
-const Menu: React.FC = () => {
+type props = {
+  buttons: {
+    text: string;
+    url: string;
+  }[];
+};
+
+const Menu: React.FC<props> = ({ buttons }) => {
+  const location = useLocation();
+
   return (
     <div className="menu">
-      <div className="menu__item active">
-        <Link to={`/programs`}>Program</Link>
-      </div>
-      <div>
-        <Link className="menu__item" to={`/courses`}>
-          Courses
-        </Link>
-      </div>
-      <div className="menu__item">
-        <Link to={`/discover`}>Discover New</Link>
-      </div>
+      {buttons.map((btn) => {
+        return (
+          <div className={`menu__item ${location.pathname === btn.url ? 'active' : ''}`}>
+            <Link to={btn.url}>{btn.text}</Link>
+          </div>
+        );
+      })}
     </div>
   );
 };
