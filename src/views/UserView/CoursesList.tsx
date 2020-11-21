@@ -3,10 +3,10 @@ import React, { useContext } from 'react';
 import { Select, List } from 'antd';
 import { BarChartOutlined, ClockCircleOutlined } from '@ant-design/icons';
 
-import { Course, TeacherContext } from 'contexts';
+import { Course, StudentContext } from 'contexts';
 
 const CourseList: React.FC = () => {
-  const { courses } = useContext(TeacherContext);
+  const { allCourses } = useContext(StudentContext);
 
   const DIFFICULTIES = ['Easy', 'Medium', 'Hard'];
 
@@ -65,7 +65,7 @@ const CourseList: React.FC = () => {
         <List
           itemLayout="vertical"
           size="large"
-          dataSource={courses}
+          dataSource={allCourses}
           renderItem={(item) => <List.Item> {makeListItem(item)} </List.Item>}
         />
       </div>
