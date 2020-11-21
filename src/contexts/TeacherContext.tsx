@@ -19,7 +19,9 @@ type ContextProps = {
   createCourse: (title: string) => void;
   updateCourseDetails: (id: string, data: Partial<Course>) => void;
   getCourseById: (id: string) => Course;
+  getLessonById: (id: string) => Lesson;
   createNewLesson: (courseId: string, title: string) => void;
+  updateLesson: (id: string, data: Partial<Lesson>) => void;
 };
 
 export const TeacherContext = createContext<ContextProps>({} as ContextProps);
@@ -61,6 +63,15 @@ export const TeacherProvider: React.FC = ({ children }) => {
     return course;
   };
 
+  const getLessonById = (id: string) => {
+    return lessons?.find((item) => item.id === id) || ({} as Lesson);
+  };
+
+  const updateLesson = async (id: string, data: Partial<Lesson>) => {
+    const lessonRef = projectFirestore.doc(`/lessons/${id}`);
+    await lessonRef.update(data);
+  };
+
   const createNewLesson = async (courseId: string, title: string) => {
     const lessonRef = projectFirestore.collection('lessons').doc();
     await lessonRef.set({ title, content: '<p><br></p>' });
@@ -81,7 +92,9 @@ export const TeacherProvider: React.FC = ({ children }) => {
         createCourse,
         updateCourseDetails,
         getCourseById,
+        getLessonById,
         createNewLesson,
+        updateLesson,
       }}
     >
       {children}

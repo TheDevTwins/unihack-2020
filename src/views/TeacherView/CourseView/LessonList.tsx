@@ -14,7 +14,7 @@ const LessonList: React.FC = () => {
       <ul>
         {lessons.map((lesson) => (
           <li key={lesson.id}>
-            <Link to={`/lessons/${lesson.id}`}>{lesson.title}</Link>
+            <Link to={`/courses/${selectedCourse.id}/lessons/${lesson.id}`}>{lesson.title}</Link>
           </li>
         ))}
       </ul>
