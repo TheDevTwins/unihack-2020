@@ -1,13 +1,14 @@
 import { Radio } from 'antd';
 import { Question } from 'contexts';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 type props = {
   question: Question;
   answerHandler: (answer: string) => void;
+  prevAnswer: string;
 };
 
-const QuestionView: React.FC<props> = ({ question, answerHandler }) => {
+const QuestionView: React.FC<props> = ({ question, answerHandler, prevAnswer }) => {
   const radioStyle = {
     display: 'block',
     height: '30px',
@@ -17,11 +18,14 @@ const QuestionView: React.FC<props> = ({ question, answerHandler }) => {
   const answers = [question.correctAnswer, ...question.otherAnswers];
   answers.sort(() => Math.random() - 0.5);
 
+  let prevAnswerIndex: any = answers.indexOf(prevAnswer);
+  prevAnswerIndex = prevAnswerIndex === -1 ? undefined : prevAnswerIndex;
+
   return (
     <div className="question">
       <div className="question__description">{question.description}</div>
 
-      <Radio.Group className="question__answerList">
+      <Radio.Group className="question__answerList" value={prevAnswerIndex}>
         {answers.map((answer, i) => {
           return (
             <Radio key={i} style={radioStyle} value={i} onClick={() => answerHandler(answer)}>

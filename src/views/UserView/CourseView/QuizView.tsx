@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
-
 import { useParams } from 'react-router-dom';
+
+import { Pagination } from 'antd';
 
 import { StudentContext } from 'contexts';
 import QuestionView from './QuestionView';
@@ -26,7 +27,17 @@ const QuizView: React.FC = () => {
   return (
     <div className="quiz">
       <h3 className="quiz__title">{quiz.title}</h3>
-      <QuestionView question={quiz.questions[questionIndex]} answerHandler={handleAnswer} />
+      <QuestionView
+        question={quiz.questions[questionIndex]}
+        prevAnswer={answers[questionIndex]}
+        answerHandler={handleAnswer}
+      />
+      <Pagination
+        current={questionIndex + 1}
+        onChange={(page) => setQuestionIndex(page - 1)}
+        pageSize={1}
+        total={quiz.questions.length}
+      />
     </div>
   );
 };
