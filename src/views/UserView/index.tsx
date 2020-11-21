@@ -5,7 +5,6 @@ import Header from './Header';
 import CourseList from './CoursesList';
 
 const UserView: React.FC = () => {
-  console.log('I am here');
   return (
     <div>
       <Header />

@@ -35,8 +35,6 @@ export const TeacherProvider: React.FC = ({ children }) => {
     await courseRef.update(data);
   };
 
-  console.log({ courses });
-
   return (
     <TeacherContext.Provider
       value={{

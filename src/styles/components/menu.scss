@@ -2,13 +2,19 @@
   display: flex;
 
   &__item {
-    color: $color-grey;
-
     &:not(:last-child) {
       margin-right: 1rem;
     }
 
-    &.active {
+    & > a {
+      &,
+      &:active,
+      &:visited {
+        color: $color-grey;
+      }
+    }
+
+    &.active > a {
       color: $color-secondary;
     }
   }
