@@ -130,8 +130,12 @@ const Browser: React.FC = () => {
         }
         onChange={(a) => setSelectedTag(a as any)}
       >
-        {currentTags.map((tag) => {
-          return <Select.Option value={tag}>{tag}</Select.Option>;
+        {currentTags.map((tag, i) => {
+          return (
+            <Select.Option key={i} value={tag}>
+              {tag}
+            </Select.Option>
+          );
         })}
       </Select>
 

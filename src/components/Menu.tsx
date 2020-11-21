@@ -13,9 +13,9 @@ const Menu: React.FC<props> = ({ buttons }) => {
 
   return (
     <div className="menu">
-      {buttons?.map((btn) => {
+      {buttons?.map((btn, i) => {
         return (
-          <div className={`menu__item ${pathname.startsWith(btn.url) ? 'active' : ''}`}>
+          <div key={i} className={`menu__item ${pathname.startsWith(btn.url) ? 'active' : ''}`}>
             <Link to={btn.url}>{btn.text}</Link>
           </div>
         );
