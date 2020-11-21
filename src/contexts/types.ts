@@ -28,6 +28,7 @@ export type Metadata = {
   duration: number; // hours
   difficulty: number;
   thumbnailUrl: string;
+  price: number;
 };
 
 export type Lesson = { id: string; title: string; content: string };

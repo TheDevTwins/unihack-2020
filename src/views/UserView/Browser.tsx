@@ -1,5 +1,5 @@
 import { BarChartOutlined, ClockCircleOutlined } from '@ant-design/icons';
-import { List, Select } from 'antd';
+import { List, Select, Slider } from 'antd';
 import { StudentContext } from 'contexts';
 import React, { useContext, useState } from 'react';
 
@@ -10,6 +10,7 @@ const Browser: React.FC = () => {
   const [dataType, setDataType] = useState('Programs');
   const [selectedTag, setSelectedTag] = useState('');
   const [selectedDifficulty, setSelectedDifficulty] = useState(-1);
+  const [selectedPrices, setSelectedPrices] = useState([0, 0]);
 
   const courseTags: string[] = [];
   const programTags: string[] = [];
@@ -28,9 +29,23 @@ const Browser: React.FC = () => {
     pair.arr.sort();
   });
 
+  const getRange: (arr: Course[] | Program[], comp: (a: number, b: number) => number) => number = (
+    arr,
+    comp
+  ) => {
+    return (arr as any).reduce((acc: number, crt: { price: number }) => {
+      return comp(acc, crt.price);
+    }, 0);
+  };
+
   // get current variables
   const currentTags = dataType === 'Programs' ? programTags : courseTags;
   const currentData = dataType === 'Programs' ? data.allPrograms : data.allCourses;
+
+  const currentPrices = {
+    min: getRange(currentData, Math.min),
+    max: getRange(currentData, Math.max),
+  };
 
   const DIFFICULTIES = ['Easy', 'Medium', 'Hard'];
 
@@ -59,10 +74,13 @@ const Browser: React.FC = () => {
 
   const filterData: any = () => {
     return (currentData as any).filter(
-      ({ difficulty, tags }: { difficulty: number; tags: string }) => {
+      ({ difficulty, tags, price }: { difficulty: number; tags: string; price: number }) => {
         let result = true;
         if (selectedTag !== '') {
           result = result && tags.includes(selectedTag);
+        }
+        if (selectedPrices[0] < selectedPrices[1]) {
+          result = result && price >= selectedPrices[0] && price <= selectedPrices[1];
         }
         if (selectedDifficulty !== -1) {
           result = result && difficulty === selectedDifficulty;
@@ -105,6 +123,14 @@ const Browser: React.FC = () => {
           return <Select.Option value={tag}>{tag}</Select.Option>;
         })}
       </Select>
+
+      <Slider
+        range
+        min={currentPrices.min}
+        max={currentPrices.max}
+        defaultValue={[currentPrices.min, currentPrices.max]}
+        onChange={setSelectedPrices}
+      />
 
       <Select
         showSearch
