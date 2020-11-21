@@ -1,8 +1,7 @@
 import React, { useContext, useState } from 'react';
 
-import { Program, Course, OrganizationContext } from 'contexts';
+import { OrganizationContext } from 'contexts';
 import { Input, Select } from 'antd';
-import { create } from 'domain';
 
 const CreateProgram: React.FC = () => {
   const [title, setTitle] = useState('');
