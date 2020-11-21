@@ -1,15 +1,14 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Switch, Route, useParams } from 'react-router-dom';
 
-import { TeacherContext } from 'contexts';
+import { StudentContext } from 'contexts';
 
-import CourseDetails from './CourseDetails';
 import LessonList from './LessonList';
-import LessonEdit from './LessonEdit';
+import LessonView from './LessonView';
 
 const CourseView: React.FC = () => {
+  const { fetching, selectCourse, selectedCourse } = useContext(StudentContext);
   const { courseId } = useParams<{ courseId: string }>();
-  const { fetching, selectCourse, selectedCourse } = useContext(TeacherContext);
 
   useEffect(() => {
     !fetching && selectCourse(courseId);
@@ -22,11 +21,11 @@ const CourseView: React.FC = () => {
   return (
     <Switch>
       <Route path={'/courses/:courseId/lessons/:lessonId'}>
-        <LessonEdit />
+        <LessonView />
       </Route>
       <Route path={'/courses/:courseId'}>
         <div>
-          <CourseDetails /> <LessonList />
+          <LessonList />
         </div>
       </Route>
     </Switch>

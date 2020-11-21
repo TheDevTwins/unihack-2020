@@ -2,7 +2,7 @@ import React, { createContext, useEffect, useState, useContext } from 'react';
 
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 
-import { Course, Program } from './types';
+import { Course, Lesson, Program } from './types';
 
 import { UserContext } from './UserContext';
 import { projectFirestore } from 'firebase_config';
@@ -14,7 +14,12 @@ type ContextProps = {
   ownPrograms: Program[];
   allCourses: Course[];
   allPrograms: Program[];
+  lessons: Lesson[];
   error: any;
+  selectedCourse: Course;
+  selectCourse: (courseId: string) => void;
+  getCourseById: (id: string) => Course;
+  getLessonById: (id: string) => Lesson;
 };
 
 export const StudentContext = createContext<ContextProps>({} as ContextProps);
@@ -50,17 +55,46 @@ export const StudentProvider: React.FC = ({ children }) => {
     idField: 'id',
   });
 
+  const [selectedCourseId, setSelectedCourseId] = useState('');
+  const selectedCourse =
+    ownCourses?.find((item) => item.id === selectedCourseId) || (undefined as any);
+
+  const lessonsRef = projectFirestore.collection('lessons');
+  const lessonsQuery = lessonsRef.where(
+    firebase.firestore.FieldPath.documentId(),
+    'in',
+    selectedCourse?.lessonIds || ['1']
+  );
+  const [lessons, fetchingLessons] = useCollectionData<Lesson>(lessonsQuery, { idField: 'id' });
+
+  const selectCourse = (courseId: string) => {
+    setSelectedCourseId(courseId);
+  };
+
+  const getCourseById = (id: string) => {
+    return ownCourses?.find((item) => item.id === id) || ({} as Course);
+  };
+
+  const getLessonById = (id: string) => {
+    return lessons?.find((item) => item.id === id) || ({} as Lesson);
+  };
+
   console.log({ allCourses, allPrograms, ownCourses, ownPrograms });
 
   return (
     <StudentContext.Provider
       value={{
-        fetching: fetchingCourses || fetchingPrograms,
+        fetching: fetchingCourses || fetchingPrograms || fetchingLessons,
         ownCourses: ownCourses || [],
         ownPrograms: ownPrograms || [],
         allCourses: allCourses || [],
         allPrograms: allPrograms || [],
+        lessons: lessons || [],
         error: false,
+        selectedCourse,
+        selectCourse,
+        getCourseById,
+        getLessonById,
       }}
     >
       {children}

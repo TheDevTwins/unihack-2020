@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 
-import { Select, List } from 'antd';
+import { Select, List, Button } from 'antd';
 import { BarChartOutlined, ClockCircleOutlined } from '@ant-design/icons';
 
 import { Course, StudentContext } from 'contexts';
@@ -28,6 +29,9 @@ const CourseList: React.FC = () => {
             </div>
           </div>
           <div className="listItem__description">{item.description}</div>
+          <Button type="primary">
+            <Link to={`/courses/${item.id}`}>Enter course</Link>
+          </Button>
         </div>
       </div>
     );

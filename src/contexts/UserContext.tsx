@@ -56,6 +56,7 @@ export const UserProvider: React.FC = ({ children }) => {
     await projectAuth.signOut();
   };
 
+
   return (
     <UserContext.Provider
       value={{

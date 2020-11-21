@@ -5,6 +5,7 @@ import { Header } from 'components';
 import CourseList from './CourseList';
 import ProgramsList from './ProgramsList';
 import Browser from './Browser';
+import CourseView from './CourseView';
 
 const UserView: React.FC = () => {
   return (
@@ -30,6 +31,9 @@ const UserView: React.FC = () => {
         <Switch>
           <Route path={`/programs`}>
             <ProgramsList />
+          </Route>
+          <Route path={`/courses/:courseId`}>
+            <CourseView />
           </Route>
           <Route path={`/courses`}>
             <CourseList />
