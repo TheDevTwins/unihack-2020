@@ -11,6 +11,7 @@ const UserTypeContextProvider: React.FC = ({ children }) => {
 
   switch (user.user_type) {
     case STUDENT:
+    case 0:
       return <StudentProvider>{children}</StudentProvider>;
     case TEACHER:
       return <TeacherProvider>{children}</TeacherProvider>;
