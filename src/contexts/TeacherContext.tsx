@@ -50,7 +50,7 @@ export const TeacherProvider: React.FC = ({ children }) => {
 
   const createCourse = async (title: string) => {
     const newCourseRef = projectFirestore.collection('courses').doc();
-    await newCourseRef.set({ title });
+    await newCourseRef.set({ title, creatorUid: user.uid, organizationId: user.organizationId });
   };
 
   const updateCourseDetails = async (id: string, data: Partial<Course>) => {
