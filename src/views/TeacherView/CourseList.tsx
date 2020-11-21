@@ -39,14 +39,14 @@ const CourseList: React.FC = () => {
 
   return (
     <div className="wrapper">
-      <button
+      <Button
         className="newCourse"
         onClick={() => {
           createCourse();
         }}
       >
         Create new course <PlusCircleOutlined />
-      </button>
+      </Button>
 
       <List
         itemLayout="vertical"

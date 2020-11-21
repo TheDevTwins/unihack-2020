@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import { TeacherContext } from 'contexts';
+import { Button } from 'antd';
 
 const QuizList: React.FC = () => {
   const { quizzes, createQuiz, selectedCourse } = useContext(TeacherContext);
@@ -16,7 +17,7 @@ const QuizList: React.FC = () => {
           </li>
         ))}
       </ul>
-      <button onClick={() => createQuiz(selectedCourse.id)}>Create new quiz</button>
+      <Button onClick={() => createQuiz(selectedCourse.id)}>Create new quiz</Button>
     </div>
   );
 };

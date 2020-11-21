@@ -3,6 +3,7 @@ import React, { useContext } from 'react';
 import { Logo, Menu, AccountDetails } from 'components';
 
 import { UserContext } from 'contexts';
+import { Button } from 'antd';
 
 type Props = {
   buttons?: { text: string; url: string }[];
@@ -18,7 +19,7 @@ const Header: React.FC<Props> = ({ buttons }) => {
           <Logo />
           <Menu buttons={buttons} />
           <AccountDetails />
-          <button onClick={logout}>logout</button>
+          <Button onClick={logout}>logout</Button>
         </div>
       </div>
     </div>

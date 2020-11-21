@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 
 import { OrganizationContext } from 'contexts';
-import { Input, Select } from 'antd';
+import { Button, Input, Select } from 'antd';
 
 const CreateProgram: React.FC = () => {
   const [title, setTitle] = useState('');
@@ -11,7 +11,7 @@ const CreateProgram: React.FC = () => {
 
   return (
     <div className="orgView__create">
-      <Input onChange={(e) => setTitle(e.target.value)} placeholder="Program title"></Input>
+      <Input onChange={(e) => setTitle(e.target.value)} placeholder="Program title" />
 
       <Select
         mode="multiple"
@@ -31,8 +31,7 @@ const CreateProgram: React.FC = () => {
         })}
       </Select>
 
-      {/*  */}
-      <button
+      <Button
         disabled={!(title && courseList.length)}
         className="submit"
         onClick={() => {
@@ -41,7 +40,7 @@ const CreateProgram: React.FC = () => {
         }}
       >
         Submit
-      </button>
+      </Button>
     </div>
   );
 };
