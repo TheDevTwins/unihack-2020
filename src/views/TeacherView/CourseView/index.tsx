@@ -6,6 +6,8 @@ import { TeacherContext } from 'contexts';
 import CourseDetails from './CourseDetails';
 import LessonList from './LessonList';
 import LessonEdit from './LessonEdit';
+import QuizList from './QuizList';
+import QuizEdit from './QuizEdit';
 
 const CourseView: React.FC = () => {
   const { courseId } = useParams<{ courseId: string }>();
@@ -24,9 +26,12 @@ const CourseView: React.FC = () => {
       <Route path={'/courses/:courseId/lessons/:lessonId'}>
         <LessonEdit />
       </Route>
+      <Route path={'/courses/:courseId/quizzes/:quizId'}>
+        <QuizEdit />
+      </Route>
       <Route path={'/courses/:courseId'}>
         <div>
-          <CourseDetails /> <LessonList />
+          <CourseDetails /> <LessonList /> <QuizList />
         </div>
       </Route>
     </Switch>

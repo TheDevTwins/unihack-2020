@@ -25,7 +25,8 @@ type ContextProps = {
   createNewLesson: (courseId: string, title: string) => void;
   updateLesson: (id: string, data: Partial<Lesson>) => void;
   createQuiz: (courseId: string) => void;
-  editQuiz: (id: string, description: string, questions: Question[]) => void;
+  updateQuiz: (id: string, data: Partial<Quiz>[]) => void;
+  getQuizById: (id: string) => Quiz;
 };
 
 export const TeacherContext = createContext<ContextProps>({} as ContextProps);
@@ -86,18 +87,22 @@ export const TeacherProvider: React.FC = ({ children }) => {
 
   const createQuiz = async (courseId: string) => {
     const quizRef = projectFirestore.collection('quizzes').doc();
-    await quizRef.set({ courseId, description: '', questions: [] });
+    await quizRef.set({ courseId, title: 'new quiz', questions: [] });
   };
 
-  const editQuiz = async (id: string, description: string, questions: Question[]) => {
+  const updateQuiz = async (id: string, data: Partial<Quiz>[]) => {
     const quizRef = projectFirestore.doc(`/quizzes/${id}`);
-    await quizRef.update({ description, questions });
+    await quizRef.update(data);
+  };
+
+  const getQuizById = (id: string) => {
+    return quizzes?.find((item) => item.id === id) || ({} as Quiz);
   };
 
   return (
     <TeacherContext.Provider
       value={{
-        fetching: fetchingLessons || fetchingOwnCourses,
+        fetching: fetchingLessons || fetchingOwnCourses || fetchingQuizzes,
         ownCourses: ownCourses || [],
         selectedCourse,
         lessons: lessons || [],
@@ -111,7 +116,8 @@ export const TeacherProvider: React.FC = ({ children }) => {
         createNewLesson,
         updateLesson,
         createQuiz,
-        editQuiz,
+        updateQuiz,
+        getQuizById,
       }}
     >
       {children}
