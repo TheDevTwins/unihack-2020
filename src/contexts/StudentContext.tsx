@@ -15,6 +15,10 @@ type ContextProps = {
   allCourses: Course[];
   allPrograms: Program[];
   error: any;
+  buyCourse: (courseId: string) => Promise<void>;
+  buyProgram: (programId: string) => Promise<void>;
+  removeCourse: (courseId: string) => Promise<void>;
+  removeProgram: (programId: string) => Promise<void>;
 };
 
 export const StudentContext = createContext<ContextProps>({} as ContextProps);
@@ -50,6 +54,37 @@ export const StudentProvider: React.FC = ({ children }) => {
     idField: 'id',
   });
 
+  const buyCourse = async (courseId: string) => {
+    const userRef = projectFirestore.doc(`/users/${user.uid}`);
+    await userRef.update({
+      courseIds: firebase.firestore.FieldValue.arrayUnion(courseId),
+    });
+  };
+
+  const removeCourse = async (courseId: string) => {
+    const userRef = projectFirestore.doc(`/users/${user.uid}`);
+    await userRef.update({
+      courseIds: firebase.firestore.FieldValue.arrayRemove(courseId),
+    });
+  };
+
+  const buyProgram = async (programId: string) => {
+    const userRef = projectFirestore.doc(`/users/${user.uid}`);
+    console.log('here');
+    await userRef.update({
+      programIds: firebase.firestore.FieldValue.arrayUnion(programId),
+    });
+    const data = await userRef.get();
+    console.log(data.data());
+  };
+
+  const removeProgram = async (programId: string) => {
+    const userRef = projectFirestore.doc(`/users/${user.uid}`);
+    await userRef.update({
+      programIds: firebase.firestore.FieldValue.arrayRemove(programId),
+    });
+  };
+
   console.log({ allCourses, allPrograms, ownCourses, ownPrograms });
 
   return (
@@ -61,6 +96,10 @@ export const StudentProvider: React.FC = ({ children }) => {
         allCourses: allCourses || [],
         allPrograms: allPrograms || [],
         error: false,
+        buyCourse,
+        buyProgram,
+        removeCourse,
+        removeProgram,
       }}
     >
       {children}
