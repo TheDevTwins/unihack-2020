@@ -1,6 +1,9 @@
 import React from 'react';
 
-import { Logo, Menu, AccountDetails } from 'components';
+import { Logo } from 'components';
+
+import Menu from './Menu';
+import AccountDetails from './AccountDetails';
 
 type Props = {
   buttons?: { text: string; url: string }[];

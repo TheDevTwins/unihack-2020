@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
-import { Header } from 'components';
+import { Header } from 'reusable';
 import CourseList from './CourseList';
 import ProgramList from './ProgramList';
 import ProgramView from './ProgramView';
