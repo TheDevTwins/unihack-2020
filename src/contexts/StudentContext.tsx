@@ -8,6 +8,8 @@ import { UserContext } from './UserContext';
 import { projectFirestore } from 'firebase_config';
 import firebase from 'firebase';
 
+import { sortedByTimestamp } from './utils';
+
 type ContextProps = {
   fetching: boolean;
   ownCourses: Course[];
@@ -19,13 +21,14 @@ type ContextProps = {
   error: any;
   selectedCourse: Course;
   selectCourse: (courseId: string) => void;
+  getProgramById: (id: string) => Program;
   getCourseById: (id: string) => Course;
   getLessonById: (id: string) => Lesson;
   getQuizById: (id: string) => Quiz;
-  buyCourse: (courseId: string) => Promise<void>;
-  buyProgram: (programId: string) => Promise<void>;
-  removeCourse: (courseId: string) => Promise<void>;
-  removeProgram: (programId: string) => Promise<void>;
+  buyCourse: (courseId: string) => void;
+  buyProgram: (programId: string) => void;
+  removeCourse: (courseId: string) => void;
+  removeProgram: (programId: string) => void;
 };
 
 export const StudentContext = createContext<ContextProps>({} as ContextProps);
@@ -77,6 +80,10 @@ export const StudentProvider: React.FC = ({ children }) => {
     setSelectedCourseId(courseId);
   };
 
+  const getProgramById = (id: string) => {
+    return ownPrograms?.find((item) => item.id === id) || (undefined as any);
+  };
+
   const getCourseById = (id: string) => {
     return ownCourses?.find((item) => item.id === id) || (undefined as any);
   };
@@ -117,21 +124,26 @@ export const StudentProvider: React.FC = ({ children }) => {
     });
   };
 
-  console.log({ allCourses, allPrograms, ownCourses, ownPrograms });
-
   return (
     <StudentContext.Provider
       value={{
-        fetching: fetchingCourses || fetchingPrograms || fetchingLessons || fetchingQuizzes,
-        ownCourses: ownCourses || [],
-        ownPrograms: ownPrograms || [],
-        allCourses: allCourses || [],
-        allPrograms: allPrograms || [],
-        lessons: lessons || [],
-        quizzes: quizzes || [],
+        fetching:
+          fetchingCourses ||
+          fetchingPrograms ||
+          fetchingLessons ||
+          fetchingQuizzes ||
+          fetchingOwnCourses ||
+          fetchingOwnPrograms,
+        ownCourses: sortedByTimestamp(ownCourses),
+        ownPrograms: sortedByTimestamp(ownPrograms),
+        allCourses: sortedByTimestamp(allCourses),
+        allPrograms: sortedByTimestamp(allPrograms),
+        lessons: sortedByTimestamp(lessons),
+        quizzes: sortedByTimestamp(quizzes),
         error: false,
         selectedCourse,
         selectCourse,
+        getProgramById,
         getCourseById,
         getLessonById,
         getQuizById,

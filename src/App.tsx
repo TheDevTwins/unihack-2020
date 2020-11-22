@@ -1,14 +1,23 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import Routes from './Routes';
 
-import 'antd/dist/antd.css';
-import 'src/styles/style.scss';
+import { LoadingWrapper } from 'components';
+import { UserContext, StudentContext, TeacherContext, OrganizationContext } from 'contexts';
 
 function App() {
+  const { loading: userLoading } = useContext(UserContext);
+  const { fetching: studentFetching } = useContext(StudentContext);
+  const { fetching: teacherFetching } = useContext(TeacherContext);
+  const { fetching: organizationFetching } = useContext(OrganizationContext);
+
+  const loading = userLoading || studentFetching || teacherFetching || organizationFetching;
+
   return (
     <div className="App">
-      <Routes />
+      <LoadingWrapper overwriteScreen loading={loading}>
+        <Routes />
+      </LoadingWrapper>
     </div>
   );
 }

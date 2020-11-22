@@ -1,11 +1,12 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 
 import { List } from 'antd';
 import { BarChartOutlined, ClockCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
 
 import { Program, StudentContext } from 'contexts';
 
-const CourseList: React.FC = () => {
+const ProgramList: React.FC = () => {
   const { ownPrograms, removeProgram } = useContext(StudentContext);
 
   const DIFFICULTIES = ['Easy', 'Medium', 'Hard'];
@@ -60,4 +61,4 @@ const CourseList: React.FC = () => {
   );
 };
 
-export default CourseList;
+export default ProgramList;

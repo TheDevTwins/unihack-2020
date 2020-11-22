@@ -13,7 +13,7 @@ import { Course, TeacherContext } from 'contexts';
 import { Link } from 'react-router-dom';
 
 const CourseList: React.FC = () => {
-  const { ownCourses, createCourse } = useContext(TeacherContext);
+  const { ownCourses, createCourse, deleteCourse } = useContext(TeacherContext);
 
   const DIFFICULTIES = ['Easy', 'Medium', 'Hard'];
 
