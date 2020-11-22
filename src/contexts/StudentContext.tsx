@@ -8,6 +8,8 @@ import { UserContext } from './UserContext';
 import { projectFirestore } from 'firebase_config';
 import firebase from 'firebase';
 
+import { sortedByTimestamp } from './utils';
+
 type ContextProps = {
   fetching: boolean;
   ownCourses: Course[];
@@ -122,8 +124,6 @@ export const StudentProvider: React.FC = ({ children }) => {
     });
   };
 
-  console.log({ allCourses, allPrograms, ownCourses, ownPrograms });
-
   return (
     <StudentContext.Provider
       value={{
@@ -134,12 +134,12 @@ export const StudentProvider: React.FC = ({ children }) => {
           fetchingQuizzes ||
           fetchingOwnCourses ||
           fetchingOwnPrograms,
-        ownCourses: ownCourses || [],
-        ownPrograms: ownPrograms || [],
-        allCourses: allCourses || [],
-        allPrograms: allPrograms || [],
-        lessons: lessons || [],
-        quizzes: quizzes || [],
+        ownCourses: sortedByTimestamp(ownCourses),
+        ownPrograms: sortedByTimestamp(ownPrograms),
+        allCourses: sortedByTimestamp(allCourses),
+        allPrograms: sortedByTimestamp(allPrograms),
+        lessons: sortedByTimestamp(lessons),
+        quizzes: sortedByTimestamp(quizzes),
         error: false,
         selectedCourse,
         selectCourse,

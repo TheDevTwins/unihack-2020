@@ -8,7 +8,7 @@ import { UserContext } from './UserContext';
 import { projectFirestore } from 'firebase_config';
 import firebase from 'firebase';
 
-import { TextEditor } from 'components';
+import { sortedByTimestamp } from './utils';
 
 type ContextProps = {
   fetching: boolean;
@@ -55,8 +55,11 @@ export const TeacherProvider: React.FC = ({ children }) => {
 
   const createCourse = async () => {
     const newCourseRef = projectFirestore.collection('courses').doc();
-    await newCourseRef.set({ creatorUid: user.uid, organizationId: user.organizationId });
-    console.log(newCourseRef.id);
+    await newCourseRef.set({
+      creatorUid: user.uid,
+      organizationId: user.organizationId,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+    });
   };
 
   const updateCourseDetails = async (id: string, data: Partial<Course>) => {
@@ -83,12 +86,22 @@ export const TeacherProvider: React.FC = ({ children }) => {
 
   const createNewLesson = async (courseId: string, title: string) => {
     const lessonRef = projectFirestore.collection('lessons').doc();
-    await lessonRef.set({ title, content: '<p><br></p>', courseId });
+    await lessonRef.set({
+      title,
+      content: '<p><br></p>',
+      courseId,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+    });
   };
 
   const createQuiz = async (courseId: string) => {
     const quizRef = projectFirestore.collection('quizzes').doc();
-    await quizRef.set({ courseId, title: 'new quiz', questions: [] });
+    await quizRef.set({
+      courseId,
+      title: 'new quiz',
+      questions: [],
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+    });
   };
 
   const updateQuiz = async (id: string, data: Partial<Quiz>[]) => {
@@ -104,10 +117,10 @@ export const TeacherProvider: React.FC = ({ children }) => {
     <TeacherContext.Provider
       value={{
         fetching: fetchingLessons || fetchingOwnCourses || fetchingQuizzes,
-        ownCourses: ownCourses || [],
+        ownCourses: sortedByTimestamp(ownCourses),
         selectedCourse,
-        lessons: lessons || [],
-        quizzes: quizzes || [],
+        lessons: sortedByTimestamp(lessons),
+        quizzes: sortedByTimestamp(quizzes),
         error: false,
         createCourse,
         updateCourseDetails,

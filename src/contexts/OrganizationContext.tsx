@@ -7,6 +7,9 @@ import { Course, Program, User } from './types';
 import { projectFirestore } from 'firebase_config';
 
 import { UserContext } from './UserContext';
+import firebase from 'firebase';
+
+import { sortedByTimestamp } from './utils';
 
 type ContextProps = {
   fetching: boolean;
@@ -41,7 +44,13 @@ export const OrganizationProvider: React.FC = ({ children }) => {
 
   const createProgram = async (title: string, courseIds: string[]) => {
     const newCourseRef = projectFirestore.collection('programs').doc();
-    await newCourseRef.set({ title, creatorUid: user.uid, organizationId: user.uid, courseIds });
+    await newCourseRef.set({
+      title,
+      creatorUid: user.uid,
+      organizationId: user.uid,
+      courseIds,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+    });
   };
 
   const updateProgramDetails = async (id: string, data: Partial<Program>) => {
@@ -62,9 +71,9 @@ export const OrganizationProvider: React.FC = ({ children }) => {
     <OrganizationContext.Provider
       value={{
         fetching: fetchingCourses || fetchingUsers || fetchingPrograms,
-        courses: courses || [],
-        teachers: teachers || [],
-        ownPrograms: ownPrograms || [],
+        courses: sortedByTimestamp(courses),
+        teachers: sortedByTimestamp(teachers),
+        ownPrograms: sortedByTimestamp(ownPrograms),
         error: false,
         createProgram,
         updateProgramDetails,

@@ -24,6 +24,8 @@ export const EASY = 0;
 export const MEDIUM = 1;
 export const HARD = 2;
 
+type Timestamp = { createdAt: { seconds: number } };
+
 export type Metadata = {
   id: string;
   creatorUid: string;
@@ -35,7 +37,7 @@ export type Metadata = {
   difficulty: number;
   thumbnailUrl: string;
   price: number;
-};
+} & Timestamp;
 
 export const MULTIPLE_CHOICE = 0;
 
@@ -45,9 +47,14 @@ export type Question = { description: string } & {
   otherAnswers: string[];
 };
 
-export type Quiz = { id: string; title: string; questions: Question[]; courseId: string };
+export type Quiz = {
+  id: string;
+  title: string;
+  questions: Question[];
+  courseId: string;
+} & Timestamp;
 
-export type Lesson = { id: string; title: string; content: string; courseId: string };
+export type Lesson = { id: string; title: string; content: string; courseId: string } & Timestamp;
 
 export type Course = Metadata & {};
 
