@@ -16,7 +16,7 @@ const CourseList: React.FC = () => {
       <div className="listItem">
         <img src={item.thumbnailUrl} alt="" className="listItem__img" />
         <div className="listItem__content">
-          <div className="listItem__tags">{item.tags.join(' - ')}</div>
+          <div className="listItem__tags">{item.tags?.join(' - ')}</div>
           <div className="listItem__title">{item.title}</div>
           <div className="listItem__stats">
             <div className="listItem__stat">
