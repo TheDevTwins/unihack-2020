@@ -1,9 +1,11 @@
 import React from 'react';
 
+import LogoImage from 'assets/logo.png';
+
 const Logo: React.FC = () => {
   return (
     <div className="logo">
-      <div className="logo__img"></div>
+      <img className="logo__img" alt="Serapi" src={LogoImage} />
       <div className="logo__text">SERAPI</div>
     </div>
   );
