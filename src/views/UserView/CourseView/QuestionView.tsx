@@ -16,8 +16,7 @@ const QuestionView: React.FC<props> = ({ question, answerHandler, prevAnswer, fi
     lineHeight: '30px',
   };
 
-  const answers = [question.correctAnswer, ...question.otherAnswers];
-  answers.sort(() => Math.random() - 0.5);
+  const { answers } = question;
 
   let prevAnswerIndex: any = answers.indexOf(prevAnswer);
   prevAnswerIndex = prevAnswerIndex === -1 ? undefined : prevAnswerIndex;

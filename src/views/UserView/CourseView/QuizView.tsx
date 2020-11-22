@@ -7,9 +7,10 @@ import { StudentContext } from 'contexts';
 import QuestionView from './QuestionView';
 
 const QuizView: React.FC = () => {
-  const { getQuizById } = useContext(StudentContext);
+  const { quizzes } = useContext(StudentContext);
   const { quizId } = useParams<{ quizId: string }>();
-  const quiz = getQuizById(quizId);
+
+  const quiz = quizzes.find((item) => item.id === quizId) || (undefined as any);
 
   const [answers, setAnswers] = useState(Array<string>(quiz?.questions.length).fill(''));
   const [questionIndex, setQuestionIndex] = useState(0);
@@ -48,7 +49,6 @@ const QuizView: React.FC = () => {
         pageSize={1}
         total={quiz.questions.length}
       />
-      <br />
       <Button type="primary" onClick={() => setFinished(true)}>
         Finish Quiz
       </Button>
