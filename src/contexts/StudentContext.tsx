@@ -139,7 +139,13 @@ export const StudentProvider: React.FC = ({ children }) => {
         allCourses: sortedByTimestamp(allCourses),
         allPrograms: sortedByTimestamp(allPrograms),
         lessons: sortedByTimestamp(lessons),
-        quizzes: sortedByTimestamp(quizzes),
+        quizzes: sortedByTimestamp(quizzes).map((qz) => ({
+          ...qz,
+          questions: qz.questions.map((qu) => ({
+            ...qu,
+            answers: [qu.correctAnswer, ...qu.otherAnswers].sort(() => Math.random() - 0.5),
+          })),
+        })),
         error: false,
         selectedCourse,
         selectCourse,
