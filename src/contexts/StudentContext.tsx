@@ -66,7 +66,7 @@ export const StudentProvider: React.FC = ({ children }) => {
 
   const [selectedCourseId, setSelectedCourseId] = useState('');
   const selectedCourse =
-    ownCourses?.find((item) => item.id === selectedCourseId) || (undefined as any);
+    allCourses?.find((item) => item.id === selectedCourseId) || (undefined as any);
 
   const lessonsRef = projectFirestore.collection('lessons');
   const lessonsQuery = lessonsRef.where('courseId', '==', selectedCourse?.id || '1');
