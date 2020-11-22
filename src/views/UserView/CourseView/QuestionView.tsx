@@ -29,16 +29,24 @@ const QuestionView: React.FC<props> = ({ question, answerHandler, prevAnswer, fi
         {answers.map((answer, i) => {
           const style: any = { ...radioStyle };
 
+          let className = '';
+
           if (finished) {
             if (prevAnswerIndex === i) {
-              if (prevAnswer === question.correctAnswer) style['backgroundColor'] = 'green';
-              else style['backgroundColor'] = 'red';
+              if (prevAnswer === question.correctAnswer) className = 'green';
+              else className = 'red';
             }
-            if (answer === question.correctAnswer) style['backgroundColor'] = 'green';
+            if (answer === question.correctAnswer) className = 'green';
           }
 
           return (
-            <Radio key={i} style={style} value={i} onClick={() => answerHandler(answer)}>
+            <Radio
+              key={i}
+              className={className}
+              style={style}
+              value={i}
+              onClick={() => answerHandler(answer)}
+            >
               {answer}
             </Radio>
           );

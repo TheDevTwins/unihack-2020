@@ -33,6 +33,14 @@
     &:hover .ant-radio {
       border-color: $color-secondary;
     }
+
+    &.green .ant-radio {
+      border-color: rgb(43, 219, 43);
+    }
+
+    &.red .ant-radio {
+      border-color: red;
+    }
   }
 
   & .ant-radio-wrapper-checked .ant-radio-checked {
