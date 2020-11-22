@@ -3,10 +3,9 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 
 import { Header } from 'components';
 import CourseList from './CourseList';
-import ProgramsList from './ProgramsList';
+import ProgramList from './ProgramList';
 import Browser from './Browser';
 import CourseView from './CourseView';
-import QuizView from './CourseView/QuizView';
 
 const UserView: React.FC = () => {
   return (
@@ -31,7 +30,7 @@ const UserView: React.FC = () => {
       <div className="wrapper">
         <Switch>
           <Route path={`/programs`}>
-            <ProgramsList />
+            <ProgramList />
           </Route>
           <Route path={`/courses/:courseId`}>
             <CourseView />
