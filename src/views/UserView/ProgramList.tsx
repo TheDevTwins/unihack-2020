@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 
 import { List } from 'antd';
 import { BarChartOutlined, ClockCircleOutlined } from '@ant-design/icons';
@@ -28,6 +29,7 @@ const ProgramList: React.FC = () => {
             </div>
           </div>
           <div className="listItem__description">{item.description}</div>
+          <Link to={`/programs/${item.id}`}>Enter me daddy</Link>
         </div>
 
         <div

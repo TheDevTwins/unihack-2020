@@ -19,6 +19,7 @@ type ContextProps = {
   error: any;
   selectedCourse: Course;
   selectCourse: (courseId: string) => void;
+  getProgramById: (id: string) => Program;
   getCourseById: (id: string) => Course;
   getLessonById: (id: string) => Lesson;
   getQuizById: (id: string) => Quiz;
@@ -75,6 +76,10 @@ export const StudentProvider: React.FC = ({ children }) => {
 
   const selectCourse = (courseId: string) => {
     setSelectedCourseId(courseId);
+  };
+
+  const getProgramById = (id: string) => {
+    return ownPrograms?.find((item) => item.id === id) || (undefined as any);
   };
 
   const getCourseById = (id: string) => {
@@ -138,6 +143,7 @@ export const StudentProvider: React.FC = ({ children }) => {
         error: false,
         selectedCourse,
         selectCourse,
+        getProgramById,
         getCourseById,
         getLessonById,
         getQuizById,
