@@ -1,9 +1,11 @@
-import { BarChartOutlined, ClockCircleOutlined, ShoppingCartOutlined } from '@ant-design/icons';
-import { List, Select, Slider } from 'antd';
-import { StudentContext } from 'contexts';
 import React, { useContext, useState } from 'react';
 
+import { List, Select, Slider } from 'antd';
+import { StudentContext } from 'contexts';
+
 import { Course, EASY, HARD, MEDIUM, Program } from 'contexts';
+
+import { CardList } from 'reusable';
 
 const Browser: React.FC = () => {
   const { allCourses, allPrograms, buyCourse, buyProgram } = useContext(StudentContext);
@@ -46,44 +48,6 @@ const Browser: React.FC = () => {
   const currentPrices = {
     min: getRange(currentData, Math.min),
     max: getRange(currentData, Math.max),
-  };
-
-  const DIFFICULTIES = ['Easy', 'Medium', 'Hard'];
-
-  const makecard = (item: Course) => {
-    return (
-      <div className="card">
-        <div
-          style={{ backgroundImage: 'url(' + item.thumbnailUrl + ')' }}
-          className="card__image"
-        ></div>
-        <div className="card__content">
-          <div className="card__tags">{item.tags.join(' - ')}</div>
-          <div className="card__title">{item.title}</div>
-          <div className="card__stats">
-            <div className="card__stat">
-              <BarChartOutlined />
-              {DIFFICULTIES[item.difficulty]}
-            </div>
-            <div className="card__stat">
-              <ClockCircleOutlined />
-              {item.duration}
-            </div>
-          </div>
-          <div className="card__description">{item.description}</div>
-        </div>
-        <div className="card__actions">
-          <div
-            className="card__buy"
-            onClick={() => {
-              dataTypeIndex ? buyCourse(item.id) : buyProgram(item.id);
-            }}
-          >
-            <ShoppingCartOutlined />
-          </div>
-        </div>
-      </div>
-    );
   };
 
   const filterData: any = () => {
@@ -179,16 +143,7 @@ const Browser: React.FC = () => {
         Clear
       </div>
 
-      <div className="CoursesList">
-        <div className="main wrapper">
-          <List
-            itemLayout="vertical"
-            size="large"
-            dataSource={filterData()}
-            renderItem={(item, i) => <List.Item key={i}> {makecard(item as any)} </List.Item>}
-          />
-        </div>
-      </div>
+      <CardList dataSource={filterData()} onBuy={dataTypeIndex ? buyCourse : buyProgram} />
     </div>
   );
 };

@@ -21,6 +21,7 @@
       "contexts": ["src/contexts"],
       "hooks": ["src/utils"],
       "components": ["src/components"],
+      "reusable": ["src/reusable"],
       "assets/*": ["src/assets/*"]
     }
   },
