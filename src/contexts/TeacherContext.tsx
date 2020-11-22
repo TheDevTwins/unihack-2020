@@ -27,6 +27,7 @@ type ContextProps = {
   createQuiz: (courseId: string) => void;
   updateQuiz: (id: string, data: Partial<Quiz>[]) => void;
   getQuizById: (id: string) => Quiz;
+  deleteCourse: (id: string) => void;
 };
 
 export const TeacherContext = createContext<ContextProps>({} as ContextProps);
@@ -113,6 +114,11 @@ export const TeacherProvider: React.FC = ({ children }) => {
     return quizzes?.find((item) => item.id === id) || ({} as Quiz);
   };
 
+  const deleteCourse = async (id: string) => {
+    const courseRef = projectFirestore.doc(`/courses/${id}`);
+    await courseRef.delete();
+  };
+
   return (
     <TeacherContext.Provider
       value={{
@@ -132,6 +138,7 @@ export const TeacherProvider: React.FC = ({ children }) => {
         createQuiz,
         updateQuiz,
         getQuizById,
+        deleteCourse
       }}
     >
       {children}

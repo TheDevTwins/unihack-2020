@@ -7,7 +7,7 @@ import { Course, TeacherContext } from 'contexts';
 import { Link } from 'react-router-dom';
 
 const CourseList: React.FC = () => {
-  const { ownCourses, createCourse } = useContext(TeacherContext);
+  const { ownCourses, createCourse, deleteCourse } = useContext(TeacherContext);
 
   const DIFFICULTIES = ['Easy', 'Medium', 'Hard'];
 
@@ -32,6 +32,7 @@ const CourseList: React.FC = () => {
           <Button>
             <Link to={`/courses/${item.id}`}>Edit course</Link>
           </Button>
+          <Button onClick={() => deleteCourse(item.id)}>Delete me? :(</Button>
         </div>
       </div>
     );
