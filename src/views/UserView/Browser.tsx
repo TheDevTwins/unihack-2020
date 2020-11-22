@@ -74,6 +74,9 @@ const Browser: React.FC = () => {
 
   return (
     <div className="browser">
+      <div className="row row--align">
+
+
       {/* Select data type */}
       <Select
         defaultValue={dataType}
@@ -111,19 +114,6 @@ const Browser: React.FC = () => {
         })}
       </Select>
 
-      <Space>
-        <Slider
-          style={{ width: 200 }}
-          range
-          marks={{ [minPrice]: minPrice, [maxPrice]: maxPrice }}
-          min={minPrice}
-          max={maxPrice}
-          value={selectedPrices as any}
-          defaultValue={[minPrice, maxPrice]}
-          onChange={setSelectedPrices}
-        />
-      </Space>
-
       <Select
         showSearch
         style={{ width: 200 }}
@@ -151,6 +141,18 @@ const Browser: React.FC = () => {
       >
         Clear filters
       </Button>
+
+      <Slider
+        style={{ width: 200 }}
+        range
+        marks={{ [minPrice]: '$' + minPrice, [maxPrice]: '$' + maxPrice }}
+        min={minPrice}
+        max={maxPrice}
+        value={selectedPrices as any}
+        defaultValue={[minPrice, maxPrice]}
+        onChange={setSelectedPrices}
+      />
+      </div>
 
       <CardList dataSource={filterData()} onBuy={dataTypeIndex ? buyCourse : buyProgram} />
     </div>
