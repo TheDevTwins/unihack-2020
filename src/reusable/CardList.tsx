@@ -109,9 +109,11 @@ const CardList: React.FC<Props> = ({
         </div>
       )}
       {createUrl && (
-        <Link className="orgView__addProgram" to={createUrl}>
-          Create new {cardName} <PlusCircleOutlined />
-        </Link>
+        <div className="row row--align u-flex">
+          <Link className="createBtn" to={createUrl}>
+            Create new {cardName} <PlusCircleOutlined className="createBtn__icon" />
+          </Link>
+        </div>
       )}
 
       <div className="row">
