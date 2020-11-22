@@ -1,0 +1,95 @@
+.card {
+  display: flex;
+  align-items: stretch;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0px 0.2rem 0.25rem 0 rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0px 0.3rem 1rem 0 rgba(0, 0, 0, 0.2);
+    //transform: scale(1.003);
+  }
+
+  & > *:not(:last-child) {
+    margin-right: 2rem;
+  }
+
+  &__content {
+    flex: 1;
+  }
+
+  &__image {
+    background-color: rgb(248, 248, 248);
+    background-size: cover;
+    background-position: center center;
+    width: 30rem;
+
+    &::before {
+      content: '';
+      display: block;
+      width: 100%;
+      padding-bottom: 56.25%;
+    }
+  }
+
+  &__tags {
+    color: $color-secondary;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+  }
+
+  &__title {
+    font-size: 2rem;
+    color: $color-grey;
+    font-family: $font-primary;
+    font-weight: bold;
+  }
+
+  &__description {
+    font-size: 1.5rem;
+  }
+
+  &__stats {
+    display: flex;
+    align-items: center;
+    margin: 1rem 0;
+    color: $color-grey;
+    font-size: 1.5rem;
+
+    & > *:first-child {
+      margin-right: 2rem;
+    }
+  }
+
+  &__stat > *:first-child {
+    margin-right: 0.5rem;
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    font-size: 3rem;
+
+    & > * {
+      cursor: pointer;
+    }
+  }
+
+  &__delete {
+    color: $color-red;
+  }
+
+  &__edit {
+    color: $color-secondary;
+
+    &:hover {
+      color: $color-primary;
+    }
+  }
+
+  &__buy {
+    color: $color-red;
+  }
+}

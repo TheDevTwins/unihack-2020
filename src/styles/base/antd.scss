@@ -1,0 +1,20 @@
+.ant-list-lg .ant-list-item {
+  padding: 0;
+
+  &:not(:last-child) {
+    margin-bottom: 2rem;
+  }
+}
+
+.ant-list-split .ant-list-item {
+  border: none;
+}
+
+.ant-btn-primary {
+  background-color: $color-secondary;
+  border: none;
+
+  &:hover {
+    background-color: $color-primary;
+  }
+}

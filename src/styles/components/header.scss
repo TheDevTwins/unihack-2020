@@ -1,7 +1,8 @@
 .header {
   display: flex;
   padding: 1rem 0;
-  box-shadow: 0 0.3rem 0.2rem 0 rgba(#000, 0.15);
+  margin-bottom: 3rem;
+  box-shadow: 0 0.1rem 0.5rem 0 rgba(#000, 0.1);
 
   &__container {
     display: flex;

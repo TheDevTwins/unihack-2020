@@ -11,10 +11,12 @@ const LessonList: React.FC = () => {
     <div>
       <h1>{selectedCourse.title}</h1>
       <h3>Lessons:</h3>
-      <ul>
+      <ul className="list">
         {lessons.map((lesson) => (
-          <li key={lesson.id}>
-            <Link to={`/courses/${courseId}/lessons/${lesson.id}`}>{lesson.title}</Link>
+          <li className="list__item" key={lesson.id}>
+            <Link className="list__link" to={`/courses/${courseId}/lessons/${lesson.id}`}>
+              {lesson.title}
+            </Link>
           </li>
         ))}
       </ul>
