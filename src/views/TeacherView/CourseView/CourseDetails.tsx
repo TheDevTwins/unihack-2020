@@ -15,6 +15,10 @@ const CourseDetails: React.FC = () => {
     <Form
       form={form}
       initialValues={initialValues}
+      // style={{ paddingLeft: 50 }}
+      labelCol={{ span: 4 }}
+      // wrapperCol={{ span: 14 }}
+      layout="horizontal"
       onFinish={() => {
         const data = form.getFieldsValue() as any;
         data.tags = data.tags.split(',');
@@ -26,9 +30,6 @@ const CourseDetails: React.FC = () => {
       </Form.Item>
       <Form.Item name="description" label="Description" rules={[{ required: true }]}>
         <Input.TextArea />
-      </Form.Item>
-      <Form.Item name="tags" label="Tags (comma separated)" rules={[{ required: true }]}>
-        <Input />
       </Form.Item>
       <Form.Item name="duration" label="Duration (h)" rules={[{ required: true }]}>
         <InputNumber />
@@ -45,6 +46,9 @@ const CourseDetails: React.FC = () => {
       </Form.Item>
       <Form.Item name="price" label="Price $" rules={[{ required: true }]}>
         <InputNumber />
+      </Form.Item>
+      <Form.Item name="tags" label="Tags (comma separated)" rules={[{ required: true }]}>
+        <Input />
       </Form.Item>
       <Button type="primary" onClick={() => form.submit()}>
         Save details
