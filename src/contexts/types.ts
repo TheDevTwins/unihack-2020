@@ -45,6 +45,7 @@ export type Question = { description: string } & {
   questionType: number;
   correctAnswer: string;
   otherAnswers: string[];
+  answers: string[];
 };
 
 export type Quiz = {
