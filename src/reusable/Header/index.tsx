@@ -12,7 +12,7 @@ type Props = {
 const Header: React.FC<Props> = ({ buttons }) => {
   return (
     <div className="header">
-      <div className="wrapper">
+      <div className="wrapper wrapper--align">
         <div className="header__container">
           <Logo />
           <Menu buttons={buttons} />

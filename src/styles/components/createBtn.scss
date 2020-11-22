@@ -1,0 +1,16 @@
+.createBtn {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  color: $color-primary;
+  cursor: pointer;
+
+  &__icon {
+    margin-left: 1rem;
+    font-size: 3rem;
+  }
+}
+
+.u-flex .createBtn {
+  margin-left: auto;
+}

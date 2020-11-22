@@ -97,14 +97,16 @@ const CardList: React.FC<Props> = ({
   return (
     <div className="wrapper">
       {onCreate && (
-        <Button
-          className="newCourse"
-          onClick={() => {
-            onCreate();
-          }}
-        >
-          Create new {cardName} <PlusCircleOutlined />
-        </Button>
+        <div className="row row--align u-flex">
+          <div
+            className="createBtn"
+            onClick={() => {
+              onCreate();
+            }}
+          >
+            Create new {cardName} <PlusCircleOutlined className="createBtn__icon" />
+          </div>
+        </div>
       )}
       {createUrl && (
         <Link className="orgView__addProgram" to={createUrl}>
@@ -112,12 +114,14 @@ const CardList: React.FC<Props> = ({
         </Link>
       )}
 
-      <List
-        itemLayout="vertical"
-        size="large"
-        dataSource={dataSource}
-        renderItem={(item, i) => <List.Item key={i}> {makeCard(item)} </List.Item>}
-      />
+      <div className="row">
+        <List
+          itemLayout="vertical"
+          size="large"
+          dataSource={dataSource}
+          renderItem={(item, i) => <List.Item key={i}> {makeCard(item)} </List.Item>}
+        />
+      </div>
     </div>
   );
 };
