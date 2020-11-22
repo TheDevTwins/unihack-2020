@@ -48,7 +48,6 @@ const QuizView: React.FC = () => {
         pageSize={1}
         total={quiz.questions.length}
       />
-      <br />
       <Button type="primary" onClick={() => setFinished(true)}>
         Finish Quiz
       </Button>

@@ -1,0 +1,30 @@
+.question {
+  width: 100%;
+  max-width: 80rem;
+  margin: 0 auto;
+
+  & > *:not(:last-child) {
+    margin-bottom: 2rem;
+  }
+
+  &__description {
+    text-align: center;
+  }
+
+  &__answerList {
+    width: 100%;
+
+    & .ant-radio-wrapper {
+      display: flex;
+      align-items: center;
+      height: auto !important;
+      padding: 2rem;
+      background-color: rgb(250, 250, 250);
+      border-radius: 4rem;
+
+      &:not(:last-child) {
+        margin-bottom: 1rem;
+      }
+    }
+  }
+}

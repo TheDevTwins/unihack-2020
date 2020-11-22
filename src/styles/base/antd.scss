@@ -18,3 +18,32 @@
     background-color: $color-primary;
   }
 }
+
+// .ant-pagination-item {
+//   &:hover {
+//     border-color: $color-primary;
+
+//     & a {
+//       &,
+//       &:active,
+//       &:visited {
+//         color: $color-primary;
+//       }
+//     }
+//   }
+
+//   &:focus,
+//   &-active {
+//     font-weight: 500;
+//     background: #fff;
+//     border-color: $color-secondary;
+
+//     & a {
+//       &,
+//       &:active,
+//       &:visited {
+//         color: $color-secondary;
+//       }
+//     }
+//   }
+// }
