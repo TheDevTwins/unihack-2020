@@ -22,6 +22,10 @@
     display: none;
   }
 
+  & .ant-radio::after {
+    display: none;
+  }
+
   & .ant-radio-wrapper {
     border: 1px solid rgb(240, 240, 240);
 
