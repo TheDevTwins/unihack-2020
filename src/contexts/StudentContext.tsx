@@ -23,10 +23,10 @@ type ContextProps = {
   getCourseById: (id: string) => Course;
   getLessonById: (id: string) => Lesson;
   getQuizById: (id: string) => Quiz;
-  buyCourse: (courseId: string) => Promise<void>;
-  buyProgram: (programId: string) => Promise<void>;
-  removeCourse: (courseId: string) => Promise<void>;
-  removeProgram: (programId: string) => Promise<void>;
+  buyCourse: (courseId: string) => void;
+  buyProgram: (programId: string) => void;
+  removeCourse: (courseId: string) => void;
+  removeProgram: (programId: string) => void;
 };
 
 export const StudentContext = createContext<ContextProps>({} as ContextProps);
