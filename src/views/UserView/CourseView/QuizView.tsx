@@ -49,7 +49,7 @@ const QuizView: React.FC = () => {
         pageSize={1}
         total={quiz.questions.length}
       />
-      <Button type="primary" onClick={() => setFinished(true)}>
+      <Button type="primary" disabled={finished} onClick={() => setFinished(true)}>
         Finish Quiz
       </Button>
       {finished && (
