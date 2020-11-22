@@ -57,6 +57,11 @@ const Login: React.FC = () => {
               Log in
             </Button>
           </Form.Item>
+          <hr/>
+          <p>Demo accounts:</p>
+          <p>demo_user@mail.com - pw1234</p>
+          <p>demo_teacher@uni.com - pw1234</p>
+          <p>demo_admin@uni.com - pw1234</p>
         </Form>
       </div>
     </Row>
