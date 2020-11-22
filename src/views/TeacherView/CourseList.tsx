@@ -43,14 +43,14 @@ const CourseList: React.FC = () => {
           <Link className="card__edit" to={`/courses/${item.id}`}>
             <EditOutlined />
           </Link>
-          {/* <div
+          <div
             className="card__delete"
             onClick={() => {
-              deleteOwnProgram(item.id);
+              deleteCourse(item.id);
             }}
           >
             <CloseCircleOutlined />
-          </div> */}
+          </div>
         </div>
       </div>
     );

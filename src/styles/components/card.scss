@@ -69,12 +69,8 @@
   &__actions {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
     font-size: 3rem;
-
-    &:not(:last-child) {
-      margin-bottom: 1rem;
-    }
 
     & > * {
       cursor: pointer;
