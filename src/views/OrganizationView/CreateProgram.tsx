@@ -36,7 +36,6 @@ const CreateProgram: React.FC = () => {
         className="submit"
         onClick={() => {
           createProgram(title, courseList);
-          console.log('works');
         }}
       >
         Submit

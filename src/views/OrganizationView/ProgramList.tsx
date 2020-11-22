@@ -11,7 +11,6 @@ const ProgramList: React.FC = () => {
   const DIFFICULTIES = ['Easy', 'Medium', 'Hard'];
 
   const makeListItem = (item: Program) => {
-    console.log(item.id);
     return (
       <div className="listItem">
         <img src={item.thumbnailUrl} alt="" className="listItem__img" />
