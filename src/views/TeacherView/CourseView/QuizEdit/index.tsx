@@ -45,7 +45,7 @@ const QuizEdit: React.FC = () => {
           updateQuiz(quizId, data);
         }}
       >
-        <Form.Item name="title" label="Title">
+        <Form.Item name="title" label="Title" rules={[{ required: true }]}>
           <Input />
         </Form.Item>
         <Form.List name="questions">
