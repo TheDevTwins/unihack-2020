@@ -15,9 +15,7 @@ const CourseDetails: React.FC = () => {
     <Form
       form={form}
       initialValues={initialValues}
-      // style={{ paddingLeft: 50 }}
       labelCol={{ span: 4 }}
-      // wrapperCol={{ span: 14 }}
       layout="horizontal"
       onFinish={() => {
         const data = form.getFieldsValue() as any;
