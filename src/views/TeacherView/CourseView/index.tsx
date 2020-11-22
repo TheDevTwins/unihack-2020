@@ -31,8 +31,16 @@ const CourseView: React.FC = () => {
           <QuizEdit />
         </Route>
         <Route path={'/courses/:courseId'}>
-          <div>
-            <CourseDetails /> <LessonList /> <QuizList />
+          <div className="courseEditor">
+            <div className="courseEditor__block">
+              <CourseDetails />
+            </div>
+            <div className="courseEditor__block">
+              <QuizList />
+            </div>
+            <div className="courseEditor__block">
+              <LessonList />
+            </div>
           </div>
         </Route>
       </Switch>

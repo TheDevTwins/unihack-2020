@@ -1,0 +1,16 @@
+.courseEditor {
+  &__block {
+    background-color: rgb(250, 250, 250);
+    border-radius: 0.4rem;
+    border-left: 0.4rem solid $color-primary;
+    padding: 2rem;
+  }
+
+  & > *:not(:last-child) {
+    margin-bottom: 3rem;
+  }
+
+  & label {
+    font-family: $font-primary;
+  }
+}
