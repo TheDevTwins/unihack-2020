@@ -20,8 +20,8 @@ const Browser: React.FC = () => {
     { input: allCourses, arr: courseTags },
     { input: allPrograms, arr: programTags },
   ].forEach((pair) => {
-    pair.input.forEach((course: Course | Program) => {
-      course.tags.forEach((tag) => {
+    pair?.input?.forEach((course: Course | Program) => {
+      course?.tags?.forEach((tag) => {
         if (!pair.arr.includes(tag)) {
           pair.arr.push(tag);
         }
