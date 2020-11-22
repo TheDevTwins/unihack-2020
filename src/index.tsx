@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import { UserProvider, UserTypeContextProvider } from 'contexts';
 
 import 'antd/dist/antd.css';
+import 'src/styles/style.scss';
 
 ReactDOM.render(
   <UserProvider>

@@ -138,7 +138,7 @@ export const TeacherProvider: React.FC = ({ children }) => {
         createQuiz,
         updateQuiz,
         getQuizById,
-        deleteCourse
+        deleteCourse,
       }}
     >
       {children}
