@@ -29,6 +29,7 @@ const ProgramList: React.FC = () => {
             </div>
           </div>
           <div className="listItem__description">{item.description}</div>
+          <Link to={`/programs/${item.id}`}>Edit me daddy</Link>
         </div>
         <div
           className="listItem__delete"
