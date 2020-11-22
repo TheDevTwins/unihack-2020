@@ -50,28 +50,28 @@ const Browser: React.FC = () => {
 
   const DIFFICULTIES = ['Easy', 'Medium', 'Hard'];
 
-  const makeListItem = (item: Course) => {
+  const makecard = (item: Course) => {
     return (
-      <div className="listItem">
-        <img src={item.thumbnailUrl} alt="" className="listItem__img" />
-        <div className="listItem__content">
-          <div className="listItem__tags">{item.tags.join(' - ')}</div>
-          <div className="listItem__title">{item.title}</div>
-          <div className="listItem__stats">
-            <div className="listItem__stat">
+      <div className="card">
+        <img src={item.thumbnailUrl} alt="" className="card__img" />
+        <div className="card__content">
+          <div className="card__tags">{item.tags.join(' - ')}</div>
+          <div className="card__title">{item.title}</div>
+          <div className="card__stats">
+            <div className="card__stat">
               <BarChartOutlined />
               {DIFFICULTIES[item.difficulty]}
             </div>
-            <div className="listItem__stat">
+            <div className="card__stat">
               <ClockCircleOutlined />
               {item.duration}
             </div>
           </div>
-          <div className="listItem__description">{item.description}</div>
+          <div className="card__description">{item.description}</div>
         </div>
 
         <div
-          className="listItem__buy"
+          className="card__buy"
           onClick={() => {
             dataTypeIndex ? buyCourse(item.id) : buyProgram(item.id);
           }}
@@ -181,7 +181,7 @@ const Browser: React.FC = () => {
             itemLayout="vertical"
             size="large"
             dataSource={filterData()}
-            renderItem={(item, i) => <List.Item key={i}> {makeListItem(item as any)} </List.Item>}
+            renderItem={(item, i) => <List.Item key={i}> {makecard(item as any)} </List.Item>}
           />
         </div>
       </div>

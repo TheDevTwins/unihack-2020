@@ -1,9 +1,13 @@
-.listItem {
+.card {
   display: flex;
   align-items: stretch;
   padding: 2rem;
   border-radius: 1rem;
-  box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.24);
+  box-shadow: 0px 0.2rem 0.25rem 0px rgba(0, 0, 0, 0.2);
+
+  &:not(:last-of-type) {
+    margin-bottom: 2rem;
+  }
 
   &__content {
     flex: 1;
