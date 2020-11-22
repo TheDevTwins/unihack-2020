@@ -122,7 +122,13 @@ export const StudentProvider: React.FC = ({ children }) => {
   return (
     <StudentContext.Provider
       value={{
-        fetching: fetchingCourses || fetchingPrograms || fetchingLessons || fetchingQuizzes,
+        fetching:
+          fetchingCourses ||
+          fetchingPrograms ||
+          fetchingLessons ||
+          fetchingQuizzes ||
+          fetchingOwnCourses ||
+          fetchingOwnPrograms,
         ownCourses: ownCourses || [],
         ownPrograms: ownPrograms || [],
         allCourses: allCourses || [],
