@@ -21,7 +21,7 @@ const Login: React.FC = () => {
         </div>
         <Form
           form={form}
-          initialValues={{ email: 'andrei@mail.com', password: '123456' }}
+          initialValues={{ email: '', password: '' }}
           onFinish={() => {
             const email = form.getFieldValue('email');
             const password = form.getFieldValue('password');
@@ -57,7 +57,7 @@ const Login: React.FC = () => {
               Log in
             </Button>
           </Form.Item>
-          <hr/>
+          <hr />
           <p>Demo accounts:</p>
           <p>demo_user@mail.com - pw1234</p>
           <p>demo_teacher@uni.com - pw1234</p>
