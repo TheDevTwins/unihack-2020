@@ -13,7 +13,7 @@ const AccountDetails: React.FC = () => {
       </div>
       <div className="accountDetails__dropdown">
         <div className="accountDetails__dropdownItem" onClick={logout}>
-          <ImportOutlined /> logout
+          <ImportOutlined /> Log Out
         </div>
       </div>
     </div>
