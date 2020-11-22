@@ -16,10 +16,12 @@ const ProgramView: React.FC = () => {
   return (
     <div>
       <h1>{program.title}</h1>
-      <ul>
+      <ul className="list">
         {courses.map((course) => (
-          <li key={course.id}>
-            <Link to={`/courses/${course.id}`}>{course.title}</Link>
+          <li className="list__item" key={course.id}>
+            <Link className="list__link" to={`/courses/${course.id}`}>
+              {course.title}
+            </Link>
           </li>
         ))}
       </ul>

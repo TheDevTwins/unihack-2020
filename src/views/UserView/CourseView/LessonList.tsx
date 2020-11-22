@@ -4,12 +4,11 @@ import { Link, useParams } from 'react-router-dom';
 import { StudentContext } from 'contexts';
 
 const LessonList: React.FC = () => {
-  const { lessons, selectedCourse } = useContext(StudentContext);
+  const { lessons } = useContext(StudentContext);
   const { courseId } = useParams<{ courseId: string }>();
 
   return (
     <div>
-      <h1>{selectedCourse.title}</h1>
       <h3>Lessons:</h3>
       <ul className="list">
         {lessons.map((lesson) => (

@@ -30,6 +30,7 @@ const CourseView: React.FC = () => {
       </Route>
       <Route path={'/courses/:courseId'}>
         <div>
+          <h1>{selectedCourse.title}</h1>
           <LessonList />
           <QuizList />
         </div>

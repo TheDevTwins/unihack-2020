@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 
-import { List, Select, Slider } from 'antd';
+import { Button, List, Select, Slider, Space } from 'antd';
 import { StudentContext } from 'contexts';
 
 import { Course, EASY, HARD, MEDIUM, Program } from 'contexts';
@@ -12,7 +12,6 @@ const Browser: React.FC = () => {
   const [dataType, setDataType] = useState('Programs');
   const [selectedTag, setSelectedTag] = useState('');
   const [selectedDifficulty, setSelectedDifficulty] = useState(-1);
-  const [selectedPrices, setSelectedPrices] = useState([0, 0]);
 
   const courseTags: string[] = [];
   const programTags: string[] = [];
@@ -68,8 +67,16 @@ const Browser: React.FC = () => {
     );
   };
 
+  const minPrice = currentPrices.min;
+  const maxPrice = currentPrices.max;
+
+  const [selectedPrices, setSelectedPrices] = useState([minPrice, maxPrice]);
+
   return (
     <div className="browser">
+      <div className="row row--align">
+
+
       {/* Select data type */}
       <Select
         defaultValue={dataType}
@@ -107,15 +114,6 @@ const Browser: React.FC = () => {
         })}
       </Select>
 
-      <Slider
-        range
-        min={currentPrices.min}
-        max={currentPrices.max}
-        value={selectedPrices as any}
-        defaultValue={[currentPrices.min, currentPrices.max]}
-        onChange={setSelectedPrices}
-      />
-
       <Select
         showSearch
         style={{ width: 200 }}
@@ -132,15 +130,28 @@ const Browser: React.FC = () => {
         <Select.Option value={HARD}>Hard</Select.Option>
       </Select>
 
-      <div
+      <Button
         className="browser__clear"
+        danger
         onClick={() => {
           setSelectedPrices([0, 0]);
           setSelectedDifficulty(-1);
           setSelectedTag('');
         }}
       >
-        Clear
+        Clear filters
+      </Button>
+
+      <Slider
+        style={{ width: 200 }}
+        range
+        marks={{ [minPrice]: '$' + minPrice, [maxPrice]: '$' + maxPrice }}
+        min={minPrice}
+        max={maxPrice}
+        value={selectedPrices as any}
+        defaultValue={[minPrice, maxPrice]}
+        onChange={setSelectedPrices}
+      />
       </div>
 
       <CardList dataSource={filterData()} onBuy={dataTypeIndex ? buyCourse : buyProgram} />

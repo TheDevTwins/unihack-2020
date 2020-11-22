@@ -3,7 +3,7 @@ import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 
 import { UserContext, STUDENT, TEACHER, ORGANIZATION } from 'contexts';
 
-import LoginMock from './views/LoginMock';
+import Login from './views/Login';
 import UserView from './views/UserView';
 import TeacherView from './views/TeacherView';
 import OrganizationView from './views/OrganizationView';
@@ -17,7 +17,7 @@ const Routes: React.FC = () => {
   const LoginEnforcer = (
     <Switch>
       <Route path="/login">
-        <LoginMock />
+        <Login />
       </Route>
       <Redirect to="/login" />
     </Switch>

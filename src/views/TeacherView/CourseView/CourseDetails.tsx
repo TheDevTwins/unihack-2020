@@ -43,6 +43,9 @@ const CourseDetails: React.FC = () => {
       <Form.Item name="thumbnailUrl" label="Thumbnail URL" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
+      <Form.Item name="price" label="Price $" rules={[{ required: true }]}>
+        <InputNumber />
+      </Form.Item>
       <Button type="primary" onClick={() => form.submit()}>
         Save details
       </Button>

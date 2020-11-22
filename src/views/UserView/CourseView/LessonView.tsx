@@ -11,6 +11,8 @@ const LessonView: React.FC = () => {
 
   const lesson = getLessonById(lessonId);
 
+  if (!lesson) return null;
+
   return (
     <div>
       <h1>{lesson.title}</h1>

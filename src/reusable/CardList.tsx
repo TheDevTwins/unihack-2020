@@ -86,7 +86,7 @@ const CardList: React.FC<Props> = ({
                 onBuy(item.id);
               }}
             >
-              <ShoppingCartOutlined />
+              ${item.price} <ShoppingCartOutlined />
             </div>
           )}
         </div>
