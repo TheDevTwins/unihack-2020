@@ -1,0 +1,33 @@
+.quizEditor {
+  &__block {
+    background-color: rgb(250, 250, 250);
+    border-radius: 0.4rem;
+    border-left: 0.4rem solid $color-primary;
+    display: flex;
+
+    &.title {
+      padding-left: 4rem;
+    }
+  }
+
+  &__aside {
+    padding: 2rem 1rem;
+    font-size: 2rem;
+    color: $color-red;
+    background-color: rgb(245, 245, 245);
+  }
+
+  &__question {
+    flex: 1;
+    padding: 2rem;
+    padding-left: 0;
+  }
+
+  & > *:not(:last-child) {
+    margin-bottom: 3rem;
+  }
+
+  & label {
+    font-family: $font-primary;
+  }
+}

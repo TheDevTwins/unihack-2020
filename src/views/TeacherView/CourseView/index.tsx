@@ -22,19 +22,21 @@ const CourseView: React.FC = () => {
   if (!selectedCourse) return null;
 
   return (
-    <Switch>
-      <Route path={'/courses/:courseId/lessons/:lessonId'}>
-        <LessonEdit />
-      </Route>
-      <Route path={'/courses/:courseId/quizzes/:quizId'}>
-        <QuizEdit />
-      </Route>
-      <Route path={'/courses/:courseId'}>
-        <div>
-          <CourseDetails /> <LessonList /> <QuizList />
-        </div>
-      </Route>
-    </Switch>
+    <div className="wrapper">
+      <Switch>
+        <Route path={'/courses/:courseId/lessons/:lessonId'}>
+          <LessonEdit />
+        </Route>
+        <Route path={'/courses/:courseId/quizzes/:quizId'}>
+          <QuizEdit />
+        </Route>
+        <Route path={'/courses/:courseId'}>
+          <div>
+            <CourseDetails /> <LessonList /> <QuizList />
+          </div>
+        </Route>
+      </Switch>
+    </div>
   );
 };
 

@@ -10,8 +10,12 @@ html {
 
 body {
   font-size: 1.6rem;
-  font-family: $font-primary;
+  font-family: $font-secondary;
   box-sizing: border-box;
+}
+
+#root {
+  padding-bottom: 5rem;
 }
 
 .vertical-spacer {
