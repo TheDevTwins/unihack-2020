@@ -1,0 +1,19 @@
+.wrapper {
+  width: 100%;
+  max-width: 120rem;
+  margin: 0 auto;
+
+  &--align {
+    padding: 0 2rem;
+  }
+}
+
+.row {
+  &--align {
+    padding: 0 2rem;
+  }
+
+  &:not(:last-child) {
+    margin-bottom: 3rem;
+  }
+}

@@ -13,3 +13,11 @@ body {
   font-family: $font-primary;
   box-sizing: border-box;
 }
+
+.vertical-spacer {
+  margin-bottom: 3rem;
+}
+
+.u-flex {
+  display: flex;
+}

@@ -58,21 +58,24 @@ const CourseList: React.FC = () => {
 
   return (
     <div className="wrapper">
-      <Button
-        className="newCourse"
-        onClick={() => {
-          createCourse();
-        }}
-      >
-        Create new course <PlusCircleOutlined />
-      </Button>
-
-      <List
-        itemLayout="vertical"
-        size="large"
-        dataSource={ownCourses}
-        renderItem={(item, i) => <List.Item key={i}> {makecard(item)} </List.Item>}
-      />
+      <div className="row row--align u-flex">
+        <div
+          className="createBtn"
+          onClick={() => {
+            createCourse();
+          }}
+        >
+          Create new course <PlusCircleOutlined className="createBtn__icon" />
+        </div>
+      </div>
+      <div className="row">
+        <List
+          itemLayout="vertical"
+          size="large"
+          dataSource={ownCourses}
+          renderItem={(item, i) => <List.Item key={i}> {makecard(item)} </List.Item>}
+        />
+      </div>
     </div>
   );
 };
