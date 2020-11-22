@@ -1,4 +1,9 @@
-import { BarChartOutlined, ClockCircleOutlined, PlusCircleOutlined } from '@ant-design/icons';
+import {
+  BarChartOutlined,
+  ClockCircleOutlined,
+  CloseCircleOutlined,
+  PlusCircleOutlined,
+} from '@ant-design/icons';
 import { List } from 'antd';
 import { OrganizationContext } from 'contexts';
 import React, { useContext } from 'react';
@@ -14,7 +19,10 @@ const ProgramList: React.FC = () => {
     console.log(item.id);
     return (
       <div className="card">
-        <img src={item.thumbnailUrl} alt="" className="card__img" />
+        <div
+          style={{ backgroundImage: 'url(' + item.thumbnailUrl + ')' }}
+          className="card__image"
+        ></div>
         <div className="card__content">
           <div className="card__tags">{item.tags.join(' - ')}</div>
           <div className="card__title">{item.title}</div>
@@ -30,13 +38,15 @@ const ProgramList: React.FC = () => {
           </div>
           <div className="card__description">{item.description}</div>
         </div>
-        <div
-          className="card__delete"
-          onClick={() => {
-            deleteOwnProgram(item.id);
-          }}
-        >
-          Delete
+        <div className="card__actions">
+          <div
+            className="card__delete"
+            onClick={() => {
+              deleteOwnProgram(item.id);
+            }}
+          >
+            <CloseCircleOutlined />
+          </div>
         </div>
       </div>
     );

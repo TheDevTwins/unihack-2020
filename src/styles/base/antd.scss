@@ -9,3 +9,12 @@
 .ant-list-split .ant-list-item {
   border: none;
 }
+
+.ant-btn-primary {
+  background-color: $color-secondary;
+  border: none;
+
+  &:hover {
+    background-color: $color-primary;
+  }
+}

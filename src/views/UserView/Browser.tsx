@@ -1,4 +1,4 @@
-import { BarChartOutlined, ClockCircleOutlined } from '@ant-design/icons';
+import { BarChartOutlined, ClockCircleOutlined, ShoppingCartOutlined } from '@ant-design/icons';
 import { List, Select, Slider } from 'antd';
 import { StudentContext } from 'contexts';
 import React, { useContext, useState } from 'react';
@@ -53,7 +53,10 @@ const Browser: React.FC = () => {
   const makecard = (item: Course) => {
     return (
       <div className="card">
-        <img src={item.thumbnailUrl} alt="" className="card__img" />
+        <div
+          style={{ backgroundImage: 'url(' + item.thumbnailUrl + ')' }}
+          className="card__image"
+        ></div>
         <div className="card__content">
           <div className="card__tags">{item.tags.join(' - ')}</div>
           <div className="card__title">{item.title}</div>
@@ -69,14 +72,15 @@ const Browser: React.FC = () => {
           </div>
           <div className="card__description">{item.description}</div>
         </div>
-
-        <div
-          className="card__buy"
-          onClick={() => {
-            dataTypeIndex ? buyCourse(item.id) : buyProgram(item.id);
-          }}
-        >
-          Buy
+        <div className="card__actions">
+          <div
+            className="card__buy"
+            onClick={() => {
+              dataTypeIndex ? buyCourse(item.id) : buyProgram(item.id);
+            }}
+          >
+            <ShoppingCartOutlined />
+          </div>
         </div>
       </div>
     );

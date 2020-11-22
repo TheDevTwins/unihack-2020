@@ -1,7 +1,13 @@
 import React, { useContext } from 'react';
 
 import { List, Button } from 'antd';
-import { BarChartOutlined, ClockCircleOutlined, PlusCircleOutlined } from '@ant-design/icons';
+import {
+  BarChartOutlined,
+  ClockCircleOutlined,
+  CloseCircleOutlined,
+  EditOutlined,
+  PlusCircleOutlined,
+} from '@ant-design/icons';
 
 import { Course, TeacherContext } from 'contexts';
 import { Link } from 'react-router-dom';
@@ -14,7 +20,10 @@ const CourseList: React.FC = () => {
   const makecard = (item: Course) => {
     return (
       <div className="card">
-        <img src={item.thumbnailUrl} alt="" className="card__img" />
+        <div
+          style={{ backgroundImage: 'url(' + item.thumbnailUrl + ')' }}
+          className="card__image"
+        ></div>
         <div className="card__content">
           <div className="card__tags">{item.tags?.join(' - ')}</div>
           <div className="card__title">{item.title}</div>
@@ -29,9 +38,19 @@ const CourseList: React.FC = () => {
             </div>
           </div>
           <div className="card__description">{item.description}</div>
-          <Button>
-            <Link to={`/courses/${item.id}`}>Edit course</Link>
-          </Button>
+        </div>
+        <div className="card__actions">
+          <Link className="card__edit" to={`/courses/${item.id}`}>
+            <EditOutlined />
+          </Link>
+          {/* <div
+            className="card__delete"
+            onClick={() => {
+              deleteOwnProgram(item.id);
+            }}
+          >
+            <CloseCircleOutlined />
+          </div> */}
         </div>
       </div>
     );

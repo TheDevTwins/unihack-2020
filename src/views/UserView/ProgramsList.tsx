@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 
 import { List } from 'antd';
-import { BarChartOutlined, ClockCircleOutlined } from '@ant-design/icons';
+import { BarChartOutlined, ClockCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
 
 import { Program, StudentContext } from 'contexts';
 
@@ -13,7 +13,10 @@ const CourseList: React.FC = () => {
   const makecard = (item: Program) => {
     return (
       <div className="card">
-        <img src={item.thumbnailUrl} alt="" className="card__img" />
+        <div
+          style={{ backgroundImage: 'url(' + item.thumbnailUrl + ')' }}
+          className="card__image"
+        ></div>
         <div className="card__content">
           <div className="card__tags">{item.tags.join(' - ')}</div>
           <div className="card__title">{item.title}</div>
@@ -29,14 +32,15 @@ const CourseList: React.FC = () => {
           </div>
           <div className="card__description">{item.description}</div>
         </div>
-
-        <div
-          className="card__buy"
-          onClick={() => {
-            removeProgram(item.id);
-          }}
-        >
-          Remove
+        <div className="card__actions">
+          <div
+            className="card__delete"
+            onClick={() => {
+              removeProgram(item.id);
+            }}
+          >
+            <CloseCircleOutlined />
+          </div>
         </div>
       </div>
     );
